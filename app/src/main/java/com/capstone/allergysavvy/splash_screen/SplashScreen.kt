@@ -1,4 +1,4 @@
-package com.capstone.allergysavvy.SplashScreen
+package com.capstone.allergysavvy.splash_screen
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
