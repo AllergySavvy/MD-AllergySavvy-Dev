@@ -14,7 +14,7 @@ import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.ui.main.MainActivity
-import com.capstone.allergysavvy.ui.slide.SlideActivity
+import com.capstone.allergysavvy.ui.onboarding.OnBoardingActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
@@ -49,7 +49,7 @@ class SplashScreen : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    intent = Intent(this, SlideActivity::class.java)
+                    intent = Intent(this, OnBoardingActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
