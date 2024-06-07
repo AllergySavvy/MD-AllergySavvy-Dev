@@ -34,5 +34,7 @@
     <string name="shape_image_1">shape image 1</string>
     <string name="image_banner_slide_1">image banner slide 1</string>
     <string name="image_banner_slide_2">image banner slide 2</string>
+    <string name="title_favorite">Favorite\n</string>
+    <string name="title_profile">Profile</string>
 
 </resources>
