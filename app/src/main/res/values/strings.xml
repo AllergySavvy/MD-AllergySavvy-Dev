@@ -38,5 +38,11 @@
     <string name="title_profile">Profile</string>
     <string name="image_login">image login</string>
     <string name="image_register">image register</string>
+    <string name="email_pattern">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="invalid_email_format">Invalid email format</string>
+    <string name="username_cannot_be_empty">Username cannot be empty</string>
+    <string name="password_must_be_at_least_8_characters">Password must be at least 8 characters long</string>
 
 </resources>
