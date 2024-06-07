@@ -44,17 +44,15 @@ class SplashScreen : AppCompatActivity() {
     private fun moveToNextActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             splashViewModel.isUserTokenAvailable.observe(this) { userTokenAvailable ->
-                if (userTokenAvailable) {
-                    intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                val intent = if (userTokenAvailable) {
+                    Intent(this, MainActivity::class.java)
                 } else {
-                    intent = Intent(this, OnBoardingActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    Intent(this, OnBoardingActivity::class.java)
                 }
+                startActivity(intent)
+                finish()
             }
-        }, 3000)
+        }, 3500)
     }
 
 }

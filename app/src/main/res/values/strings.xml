@@ -31,5 +31,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="shape_image_1">shape image 1</string>
+    <string name="image_banner_slide_1">image banner slide 1</string>
+    <string name="image_banner_slide_2">image banner slide 2</string>
 
 </resources>
