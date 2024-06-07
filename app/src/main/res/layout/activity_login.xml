@@ -7,4 +7,129 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity">
 
+    <TextView
+        android:id="@+id/tv_title_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/sign_in"
+        android:textColor="@color/dark_green"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_login"
+        android:layout_width="244dp"
+        android:layout_height="244dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/image_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_login"
+        app:srcCompat="@drawable/airy_safe_authorization_and_password_protection" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_email_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="@color/dark_green"
+        app:boxStrokeWidth="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_email_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/email_hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_password_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="@color/dark_green"
+        app:boxStrokeWidth="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/ti_email_login"
+        app:layout_constraintStart_toStartOf="@+id/ti_email_login"
+        app:layout_constraintTop_toBottomOf="@+id/ti_email_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_password_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/password_hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/roboto"
+        android:text="@string/forgot_password"
+        android:textColor="@color/dark_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_password_login" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/ti_password_login"
+        app:layout_constraintStart_toStartOf="@+id/ti_password_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_forgot_password" />
+
+    <TextView
+        android:id="@+id/tv_dont_have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/not_have_account"
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <Button
+        android:id="@+id/btn_go_to_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-20dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/roboto"
+        android:text="@string/sign_up"
+        android:textColor="@color/dark_green"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_dont_have_account"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

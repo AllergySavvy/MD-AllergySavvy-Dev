@@ -36,5 +36,7 @@
     <string name="image_banner_slide_2">image banner slide 2</string>
     <string name="title_favorite">Favorite\n</string>
     <string name="title_profile">Profile</string>
+    <string name="image_login">image login</string>
+    <string name="image_register">image register</string>
 
 </resources>
