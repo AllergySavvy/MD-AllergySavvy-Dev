@@ -1,6 +1,7 @@
 package com.capstone.allergysavvy.ui.login
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,10 +26,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        checkThemeSetting()
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        checkThemeSetting()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -52,12 +54,21 @@ class LoginActivity : AppCompatActivity() {
         )[SettingViewModel::class.java]
 
         settingViewModel.getThemeSetting().observe(this) { darkModeActive ->
-            if (darkModeActive) {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+            val mode = when {
+                darkModeActive -> AppCompatDelegate.MODE_NIGHT_YES
+                !darkModeActive -> {
+                    if (isSystemInDarkMode()) AppCompatDelegate.MODE_NIGHT_YES
+                    else AppCompatDelegate.MODE_NIGHT_NO
+                }
+
+                else -> AppCompatDelegate.MODE_NIGHT_NO
             }
+            delegate.localNightMode = mode
         }
+    }
+
+    private fun isSystemInDarkMode(): Boolean {
+        return (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 
     private fun setupAction() {

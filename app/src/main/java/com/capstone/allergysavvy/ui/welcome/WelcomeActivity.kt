@@ -1,6 +1,7 @@
 package com.capstone.allergysavvy.ui.welcome
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,22 +24,12 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        checkThemeSetting()
+
+
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val settingPreference = SettingPreference.getInstance(application.dataStore)
-        val settingViewModel = ViewModelProvider(
-            this,
-            SettingViewModelFactory(settingPreference)
-        )[SettingViewModel::class.java]
-
-        settingViewModel.getThemeSetting().observe(this) { darkModeActive ->
-            if (darkModeActive) {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-            }
-        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -47,6 +38,31 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         setupAction()
+    }
+
+    private fun checkThemeSetting() {
+        val settingPreference = SettingPreference.getInstance(application.dataStore)
+        val settingViewModel = ViewModelProvider(
+            this,
+            SettingViewModelFactory(settingPreference)
+        )[SettingViewModel::class.java]
+
+        settingViewModel.getThemeSetting().observe(this) { darkModeActive ->
+            val mode = when {
+                darkModeActive -> AppCompatDelegate.MODE_NIGHT_YES
+                !darkModeActive -> {
+                    if (isSystemInDarkMode()) AppCompatDelegate.MODE_NIGHT_YES
+                    else AppCompatDelegate.MODE_NIGHT_NO
+                }
+
+                else -> AppCompatDelegate.MODE_NIGHT_NO
+            }
+            delegate.localNightMode = mode
+        }
+    }
+
+    private fun isSystemInDarkMode(): Boolean {
+        return (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 
     private fun setupAction() {
