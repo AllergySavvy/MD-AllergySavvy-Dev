@@ -20,6 +20,7 @@ import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,6 +35,9 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val factoryResult: LoginViewModelFactory = LoginViewModelFactory.getInstance(application)
+        loginViewModel = ViewModelProvider(this, factoryResult)[LoginViewModel::class.java]
 
         setupAction()
         textObserver()

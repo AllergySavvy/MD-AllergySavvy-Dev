@@ -20,6 +20,7 @@ import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var registerViewModel: RegisterViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,6 +35,15 @@ class RegisterActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val factoryResult: RegisterViewModelFactory =
+            RegisterViewModelFactory.getInstance(application)
+
+        registerViewModel = ViewModelProvider(
+            this,
+            factoryResult
+        )[RegisterViewModel::class.java]
+
 
         setupAction()
         textObserver()
