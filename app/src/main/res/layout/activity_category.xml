@@ -7,4 +7,98 @@
     android:layout_height="match_parent"
     tools:context=".ui.category.CategoryActivity">
 
+    <TextView
+        android:id="@+id/tv_title_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/category_title_choose_category"
+        android:textColor="@color/dark_green"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_hello_user_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/inter"
+        android:text="Hello, [USER]"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_category"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_category"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_category" />
+
+    <TextView
+        android:id="@+id/tv_description_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_extrabold"
+        android:text="@string/please_choose_category"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_category"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_hello_user_category"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hello_user_category" />
+
+    <RadioGroup
+        android:id="@+id/rg_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_description_category"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_category">
+
+        <RadioButton
+            android:id="@+id/rb_non_allergy_category"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/custom_radio_selector_category"
+            android:button="@null"
+            android:drawableTop="@drawable/allergy_icon"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/non_allergy"
+            android:textAlignment="center"
+            android:textColor="@drawable/custom_radio_text_category"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_allergy_category"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_radio_selector_category"
+            android:button="@null"
+            android:drawableTop="@drawable/non_allergy_icon"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/allergy"
+            android:textAlignment="center"
+            android:textColor="@drawable/custom_radio_text_category"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_choose_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/next"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rg_category"
+        app:layout_constraintStart_toStartOf="@+id/rg_category"
+        app:layout_constraintTop_toBottomOf="@+id/rg_category"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
