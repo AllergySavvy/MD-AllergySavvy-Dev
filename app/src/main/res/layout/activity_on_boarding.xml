@@ -73,5 +73,118 @@
         app:layout_constraintTop_toTopOf="@+id/menu2"
         app:srcCompat="@drawable/rectangle_43" />
 
+    <ImageView
+        android:id="@+id/iv_on_boarding_1"
+        android:layout_width="286dp"
+        android:layout_height="286dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bonbon_healthy_food_online_shopping" />
+
+    <TextView
+        android:id="@+id/tv_title_on_boarding_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/on_boarding_title_2"
+        android:textAlignment="center"
+        android:textColor="@color/dark_green"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_description_on_boarding_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/montserrat_light"
+        android:text="@string/on_boarding_description_2"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_on_boarding_2"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_on_boarding_2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_on_boarding_2" />
+
+    <ImageView
+        android:id="@+id/iv_shape_on_boarding_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33999997"
+        app:srcCompat="@drawable/ellipse_18" />
+
+    <ImageView
+        android:id="@+id/iv_on_boarding_2"
+        android:layout_width="188dp"
+        android:layout_height="263dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/_d_business_young_man_with_shopping" />
+
+    <TextView
+        android:id="@+id/tv_title_on_boarding_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/on_boarding_title_3"
+        android:textAlignment="center"
+        android:textColor="@color/dark_green"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_description_on_boarding_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/montserrat_light"
+        android:text="@string/on_boarding_description_3"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_on_boarding_3"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_on_boarding_3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_on_boarding_3" />
+
+    <ImageView
+        android:id="@+id/iv_shape_on_boarding_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:srcCompat="@drawable/ellipse_19" />
+
+    <ImageView
+        android:id="@+id/iv_on_boarding_3"
+        android:layout_width="wrap_content"
+        android:layout_height="310dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/casual_life_3d_paper_bag_full_of_groceries" />
+
+    <Button
+        android:id="@+id/btn_move_to_welcome_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/started"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

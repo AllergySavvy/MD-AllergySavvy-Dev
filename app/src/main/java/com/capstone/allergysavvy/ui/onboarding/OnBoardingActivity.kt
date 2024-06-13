@@ -1,5 +1,6 @@
 package com.capstone.allergysavvy.ui.onboarding
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +15,7 @@ import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.ActivityOnBoardingBinding
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
+import com.capstone.allergysavvy.ui.welcome.WelcomeActivity
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -34,6 +36,7 @@ class OnBoardingActivity : AppCompatActivity() {
             insets
         }
 
+        setupAction()
 
     }
 
@@ -60,6 +63,14 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun isSystemInDarkMode(): Boolean {
         return (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+    }
+
+    private fun setupAction() {
+        binding.btnMoveToWelcomeActivity.setOnClickListener {
+            val intent = Intent(this@OnBoardingActivity, WelcomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 
