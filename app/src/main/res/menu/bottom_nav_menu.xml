@@ -7,6 +7,16 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_video"
+        android:icon="@drawable/video"
+        android:title="@string/title_video" />
+
+    <item
+        android:id="@+id/navigation_ingredient"
+        android:icon="@drawable/ingredient"
+        android:title="@string/title_ingredient" />
+
+    <item
         android:id="@+id/navigation_favorite"
         android:icon="@drawable/favorite"
         android:title="@string/title_favorite" />
@@ -15,5 +25,6 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile"
         android:title="@string/title_profile" />
+
 
 </menu>

@@ -22,4 +22,14 @@
         android:name="com.capstone.allergysavvy.ui.main.fragment.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_ingredient"
+        android:name="com.capstone.allergysavvy.ui.main.fragment.ingredient.IngredientFragment"
+        android:label="@string/title_ingredient"
+        tools:layout="@layout/fragment_ingredient" />
+    <fragment
+        android:id="@+id/navigation_video"
+        android:name="com.capstone.allergysavvy.ui.main.fragment.video.VideoFragment"
+        android:label="@string/title_video"
+        tools:layout="@layout/fragment_video" />
 </navigation>
