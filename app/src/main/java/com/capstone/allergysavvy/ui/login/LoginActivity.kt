@@ -15,6 +15,7 @@ import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.SettingPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.ActivityLoginBinding
+import com.capstone.allergysavvy.ui.category.CategoryActivity
 import com.capstone.allergysavvy.ui.register.RegisterActivity
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
@@ -133,6 +134,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-
+        val intent = Intent(this@LoginActivity, CategoryActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
