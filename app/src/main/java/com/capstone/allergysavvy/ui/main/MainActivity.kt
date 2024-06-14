@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        checkThemeSetting()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -32,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navView.setupWithNavController(navController)
+
+        checkThemeSetting()
+
     }
 
     private fun checkThemeSetting() {
@@ -42,20 +43,11 @@ class MainActivity : AppCompatActivity() {
         )[SettingViewModel::class.java]
 
         settingViewModel.getThemeSetting().observe(this) { darkModeActive ->
-            val mode = when {
-                darkModeActive -> AppCompatDelegate.MODE_NIGHT_YES
-                !darkModeActive -> {
-                    if (isSystemInDarkMode()) AppCompatDelegate.MODE_NIGHT_YES
-                    else AppCompatDelegate.MODE_NIGHT_NO
-                }
-
-                else -> AppCompatDelegate.MODE_NIGHT_NO
+            if (darkModeActive) {
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
             }
-            delegate.localNightMode = mode
         }
-    }
-
-    private fun isSystemInDarkMode(): Boolean {
-        return (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 }

@@ -62,5 +62,7 @@
     <string name="text_edit_language_fragment_profile">Language</string>
     <string name="text_edit_theme_fragment_profile">Theme</string>
     <string name="logout">Logout</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
 
 </resources>
