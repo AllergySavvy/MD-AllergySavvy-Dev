@@ -49,5 +49,18 @@
     <string name="started">Let\'s get started!</string>
     <string name="title_video">Video</string>
     <string name="title_ingredient">Ingredient</string>
+    <string name="tv_title_fragment_video">What do you want to cook today?</string>
+    <string name="tv_title_ingredient">What is in your kitchen?</string>
+    <string name="search_hint_ingredient">Search Your Ingredient</string>
+    <string name="title_tv_fragment_favorite">Your Favorite Recipes</string>
+    <string name="hint_search_recipe">Search Your Recipe</string>
+    <string name="title_tv_fragment_profile">My Profile</string>
+    <string name="title_setting_profile_fragment">Setting</string>
+    <string name="title_account_profile_fragment">Account</string>
+    <string name="title_action_profile_fragment">Action</string>
+    <string name="text_button_edit_profile">Edit Profile</string>
+    <string name="text_edit_language_fragment_profile">Language</string>
+    <string name="text_edit_theme_fragment_profile">Theme</string>
+    <string name="logout">Logout</string>
 
 </resources>
