@@ -4,7 +4,7 @@
     <string name="on_boarding_description_1">Welcome to AllergySavvy, your smart assistant for allergy-aware cooking! Enjoy personalized recipe recommendations, ingredient tracking to avoid allergens, and easy-to-follow cooking tips. We\'re here to make your cooking safe and enjoyable.</string>
     <string name="on_boarding_description_2">Set up your profile by entering your specific allergies (e.g., nuts, dairy, gluten). Receive tailored recipes that meet your needs, ensuring every meal is safe and delicious.</string>
     <string name="on_boarding_title_2">Personalize Your Experience</string>
-    <string name="on_boarding_title_3">Discover Allergy-Safe Recipes</string>
+    <string name="on_boarding_title_3">Discover\nAllergy-Safe Recipes</string>
     <string name="on_boarding_description_3">Explore a variety of recipes filtered to avoid your allergens. Follow step-by-step instructions and get tips for substituting common allergens.Enjoy a worry-free cooking experience with AllergySavvy!</string>
     <string name="welcome_title">AllergySavvy Smart Solutions for Allergy-Aware Cooking</string>
     <string name="welcome_description">AllergySavvy helps you create delicious, allergy-safe meals with personalized recipes, allergen tracking, and easy cooking tips. Enjoy safe meals tailored to your allergy needs.</string>
