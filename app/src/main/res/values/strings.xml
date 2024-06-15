@@ -64,5 +64,7 @@
     <string name="logout">Logout</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="recipes_name">Recipes Name</string>
+    <string name="set_favorite_ingredient">Set Favorite Ingredient</string>
 
 </resources>
