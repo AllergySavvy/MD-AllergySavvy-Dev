@@ -72,5 +72,7 @@
     <string name="views">Views</string>
     <string name="chanel_video">Chanel Video</string>
     <string name="thumbnail_video">Thumbnail Video</string>
+    <string name="icon_ingredient">Icon ingredient</string>
+    <string name="ingredient_name">Ingredient Name</string>
 
 </resources>
