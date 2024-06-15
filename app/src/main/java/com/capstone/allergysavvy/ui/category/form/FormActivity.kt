@@ -3,6 +3,7 @@ package com.capstone.allergysavvy.ui.category.form
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
@@ -66,16 +67,32 @@ class FormActivity : AppCompatActivity() {
 
         when {
             ingredient1.isEmpty() -> {
-                binding.tiAllergyIngredient1.error = "Please enter ingredient"
+                binding.tiAllergyIngredient1.error = "Please enter ingredient here"
             }
 
             else -> with(binding) {
                 tiAllergyIngredient1.error = null
                 tiAllergyIngredient2.error = null
                 tiAllergyIngredient3.error = null
-                inputIngredient(ingredient1, ingredient2, ingredient3)
+                showDialogConfirmation(ingredient1, ingredient2, ingredient3)
             }
         }
+    }
+
+    private fun showDialogConfirmation(
+        ingredient1: String,
+        ingredient2: String?,
+        ingredient3: String?
+    ) {
+        AlertDialog.Builder(this)
+            .setTitle("Confirmation")
+            .setMessage("Are you sure you want to submit your allergy food ingredients?\n\n${ingredient1}\n${ingredient2}\n${ingredient3}")
+            .setPositiveButton("Confirm") { _, _ ->
+                inputIngredient(ingredient1, ingredient2, ingredient3)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+            .show()
     }
 
     private fun inputIngredient(ingredient1: String, ingredient2: String?, ingredient3: String?) {

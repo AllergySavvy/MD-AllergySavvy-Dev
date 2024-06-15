@@ -1,5 +1,6 @@
 package com.capstone.allergysavvy.ui.main.fragment.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.FragmentProfileBinding
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
+import com.capstone.allergysavvy.ui.welcome.WelcomeActivity
 
 class ProfileFragment : Fragment() {
 
@@ -39,11 +41,34 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupActionTheme()
+        setupLogout()
     }
 
     private fun setupActionTheme() {
         binding.btnEditThemeFragmentProfile.setOnClickListener {
             showSettingThemeDialog()
+        }
+    }
+
+    private fun setupLogout() {
+        binding.btnLogoutFragmentProfile.setOnClickListener {
+            dialogLogoutConfirmation()
+        }
+    }
+
+    private fun dialogLogoutConfirmation() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle("Logout")
+            setMessage("Are you sure want to logout?")
+            setPositiveButton("Yes") { _, _ ->
+                val intent = Intent(requireContext(), WelcomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                activity?.finish()
+            }
+            setNegativeButton("No", null)
+            create()
+            show()
         }
     }
 
