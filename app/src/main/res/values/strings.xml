@@ -74,5 +74,11 @@
     <string name="thumbnail_video">Thumbnail Video</string>
     <string name="icon_ingredient">Icon ingredient</string>
     <string name="ingredient_name">Ingredient Name</string>
+    <string name="title_banner_home_fragment">Healthy\nFood For\nYour Life</string>
+    <string name="welcome_with_coma">Welcome,</string>
+    <string name="recent_recipes">Recent Recipes</string>
+    <string name="recent_ingredients">Recent Ingredients</string>
+    <string name="shape_image_banner_home_fragment">Shape image banner home fragment</string>
+    <string name="image_banner_home_fragment">Image banner home fragment</string>
 
 </resources>
