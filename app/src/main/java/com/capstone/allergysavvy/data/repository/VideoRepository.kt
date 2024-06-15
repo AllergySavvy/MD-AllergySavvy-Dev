@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.capstone.allergysavvy.BuildConfig
 import com.capstone.allergysavvy.data.Result
 import com.capstone.allergysavvy.data.response.SearchListResponse
+import com.capstone.allergysavvy.data.response.Thumbnails
 import com.capstone.allergysavvy.data.response.Video
 import com.capstone.allergysavvy.data.response.VideoDetailsResponse
 import com.capstone.allergysavvy.data.retrofit.ApiService
@@ -61,10 +62,12 @@ class VideoRepository private constructor(
             ) {
                 if (response.isSuccessful && response.body() != null) {
                     val videoYoutube = response.body()!!.items.map { result ->
+                        val thumbnails = result.snippet.thumbnails
+                        val thumbnailUrl = getMaxResThumbnailUrl(thumbnails)
                         Video(
                             result.snippet.title,
                             result.id,
-                            result.snippet.thumbnails.default.url,
+                            thumbnailUrl,
                             result.snippet.channelTitle,
                             result.statistics.viewCount
                         )
@@ -81,6 +84,15 @@ class VideoRepository private constructor(
                 result.value = Result.Error(t.message ?: "Error get video details")
             }
         })
+    }
+
+    private fun getMaxResThumbnailUrl(thumbnails: Thumbnails): String {
+        return when {
+            thumbnails.maxres != null -> thumbnails.maxres.url
+            thumbnails.high != null -> thumbnails.high.url
+            thumbnails.medium != null -> thumbnails.medium.url
+            else -> thumbnails.default.url
+        }
     }
 
     companion object {

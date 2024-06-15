@@ -36,7 +36,7 @@ class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLB
                     .into(ivThumbnailVideo)
 
                 root.setOnClickListener {
-                    openYoutubeVideo(video.videoId)
+                    openYoutubeVideo(video.id)
                 }
             }
         }
@@ -60,7 +60,7 @@ class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLB
         val DIFF_CALLBACK: DiffUtil.ItemCallback<Video> =
             object : DiffUtil.ItemCallback<Video>() {
                 override fun areItemsTheSame(oldItem: Video, newItem: Video): Boolean {
-                    return oldItem.videoId == newItem.videoId
+                    return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean {

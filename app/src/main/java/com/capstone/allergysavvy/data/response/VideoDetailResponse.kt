@@ -16,8 +16,9 @@ data class Statistics(
 
 data class Video(
     val title: String,
-    val videoId: String,
+    val id: String,
     val thumbnailUrl: String,
     val channelTitle: String,
     val viewCount: String
 )
+
