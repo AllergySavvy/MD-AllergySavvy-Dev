@@ -74,6 +74,16 @@
         app:srcCompat="@drawable/rectangle_43" />
 
     <ImageView
+        android:id="@+id/iv_shape_on_boarding_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002"
+        app:srcCompat="@drawable/shape_on_boarding_1" />
+
+    <ImageView
         android:id="@+id/iv_on_boarding_1"
         android:layout_width="286dp"
         android:layout_height="286dp"
@@ -81,7 +91,7 @@
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bonbon_healthy_food_online_shopping" />
+        app:srcCompat="@drawable/icon_on_boarding_1" />
 
     <TextView
         android:id="@+id/tv_title_on_boarding_2"
@@ -118,7 +128,7 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.33999997"
-        app:srcCompat="@drawable/ellipse_18" />
+        app:srcCompat="@drawable/shape_on_boarding_2" />
 
     <ImageView
         android:id="@+id/iv_on_boarding_2"
@@ -127,7 +137,7 @@
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/_d_business_young_man_with_shopping" />
+        app:srcCompat="@drawable/icon_on_boarding_2" />
 
     <TextView
         android:id="@+id/tv_title_on_boarding_3"
@@ -163,7 +173,7 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07999998"
-        app:srcCompat="@drawable/ellipse_19" />
+        app:srcCompat="@drawable/shape_on_boarding_3" />
 
     <ImageView
         android:id="@+id/iv_on_boarding_3"
@@ -172,7 +182,7 @@
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/casual_life_3d_paper_bag_full_of_groceries" />
+        app:srcCompat="@drawable/icon_on_boarding_3" />
 
     <Button
         android:id="@+id/btn_move_to_welcome_activity"

@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_login"
-        app:srcCompat="@drawable/airy_safe_authorization_and_password_protection" />
+        app:srcCompat="@drawable/icon_sign_in_sign_up" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_email_login"
