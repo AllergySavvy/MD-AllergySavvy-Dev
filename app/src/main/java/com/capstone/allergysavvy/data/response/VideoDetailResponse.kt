@@ -7,7 +7,13 @@ data class VideoDetailsResponse(
 data class VideoDetailItem(
     val id: String,
     val snippet: Snippet,
-    val statistics: Statistics
+    val statistics: Statistics,
+    val contentDetails: ContentDetails?
+)
+
+
+data class ContentDetails(
+    val duration: String
 )
 
 data class Statistics(
@@ -19,6 +25,7 @@ data class Video(
     val id: String,
     val thumbnailUrl: String,
     val channelTitle: String,
-    val viewCount: String
+    val viewCount: String,
+    val duration: String
 )
 

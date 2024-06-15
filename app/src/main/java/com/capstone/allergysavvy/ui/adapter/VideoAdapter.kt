@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.allergysavvy.data.response.Video
 import com.capstone.allergysavvy.databinding.ItemVideoBinding
+import com.capstone.allergysavvy.utils.formatDuration
 
 class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
@@ -31,6 +32,7 @@ class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLB
                 tvViewsVideo.text = video.viewCount
                 tvTitleVideo.text = video.title
                 tvChanelName.text = video.channelTitle
+                tvDuration.text = formatDuration(video.duration)
                 Glide.with(itemView.context)
                     .load(video.thumbnailUrl)
                     .into(ivThumbnailVideo)

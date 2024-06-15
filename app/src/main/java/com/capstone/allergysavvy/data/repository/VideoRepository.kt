@@ -52,7 +52,7 @@ class VideoRepository private constructor(
 
     private fun fetchVideoDetails(videoIds: String, result: MutableLiveData<Result<List<Video>>>) {
         apiService.getVideoDetails(
-            "snippet,statistics",
+            "snippet,statistics,contentDetails",
             videoIds,
             BuildConfig.API_KEY_YOUTUBE
         ).enqueue(object : Callback<VideoDetailsResponse> {
@@ -64,12 +64,14 @@ class VideoRepository private constructor(
                     val videoYoutube = response.body()!!.items.map { result ->
                         val thumbnails = result.snippet.thumbnails
                         val thumbnailUrl = getMaxResThumbnailUrl(thumbnails)
+                        val duration = result.contentDetails?.duration ?: "PT0M0S"
                         Video(
                             result.snippet.title,
                             result.id,
                             thumbnailUrl,
                             result.snippet.channelTitle,
-                            result.statistics.viewCount
+                            result.statistics.viewCount,
+                            duration
                         )
                     }
                     result.value = Result.Success(videoYoutube)
@@ -85,6 +87,7 @@ class VideoRepository private constructor(
             }
         })
     }
+
 
     private fun getMaxResThumbnailUrl(thumbnails: Thumbnails): String {
         return when {
