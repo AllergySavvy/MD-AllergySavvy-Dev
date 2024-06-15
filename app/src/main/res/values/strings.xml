@@ -90,5 +90,6 @@
     <string name="steps_description_list">Steps description list</string>
     <string name="save_favorite_recipes">Save favorite recipes</string>
     <string name="back_button_description">Back to list recipes</string>
+    <string name="hello">Hello,</string>
 
 </resources>
