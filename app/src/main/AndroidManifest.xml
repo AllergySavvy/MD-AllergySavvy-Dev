@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AllergySavvy"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.detailrecipe.DetailRecipeActivity"
+            android:name=".ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.category.form.FormActivity"

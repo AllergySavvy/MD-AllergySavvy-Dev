@@ -15,6 +15,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "BASE_URL_YOUTUBE",
+            "\"https://www.googleapis.com/\""
+        )
+
+        buildConfigField(
+            "String",
+            "API_KEY_YOUTUBE",
+            "\"AIzaSyDsGI92Dq-gdj8ha4wbTpsQZNEtdwbaDOQ\""
+        )
     }
 
     buildTypes {
@@ -35,6 +47,11 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+    }
+
+    packaging {
+        resources.excludes.add("META-INF/*")
     }
 }
 
@@ -62,5 +79,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(libs.androidx.cardview)
+
+    implementation(libs.google.api.services.youtube)
+    implementation(libs.listenablefuture)
+
+    implementation(libs.glide)
+
 
 }

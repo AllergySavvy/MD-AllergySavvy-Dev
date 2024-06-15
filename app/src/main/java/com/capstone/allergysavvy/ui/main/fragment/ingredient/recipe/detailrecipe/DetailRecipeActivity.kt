@@ -1,4 +1,4 @@
-package com.capstone.allergysavvy.ui.main.detailrecipe
+package com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

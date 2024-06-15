@@ -1,7 +1,6 @@
 package com.capstone.allergysavvy.ui.login
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher

@@ -1,7 +1,6 @@
 package com.capstone.allergysavvy.ui.category
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
