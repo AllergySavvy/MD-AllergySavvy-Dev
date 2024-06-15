@@ -44,7 +44,6 @@
     <string name="invalid_email_format">Invalid email format</string>
     <string name="username_cannot_be_empty">Username cannot be empty</string>
     <string name="password_must_be_at_least_8_characters">Password must be at least 8 characters long</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="started">Let\'s get started!</string>
     <string name="title_video">Video</string>
@@ -80,5 +79,16 @@
     <string name="recent_ingredients">Recent Ingredients</string>
     <string name="shape_image_banner_home_fragment">Shape image banner home fragment</string>
     <string name="image_banner_home_fragment">Image banner home fragment</string>
+    <string name="transition_background">Transition background</string>
+    <string name="photo_recipes">Photo recipes</string>
+    <string name="title_recipes">Title Recipes</string>
+    <string name="location_recipes">Location Recipes</string>
+    <string name="recipes_description">Recipes Description</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="ingredients_list">Ingredients list</string>
+    <string name="steps">Steps</string>
+    <string name="steps_description_list">Steps description list</string>
+    <string name="save_favorite_recipes">Save favorite recipes</string>
+    <string name="back_button_description">Back to list recipes</string>
 
 </resources>

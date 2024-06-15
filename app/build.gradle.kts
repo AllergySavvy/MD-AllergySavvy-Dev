@@ -85,5 +85,7 @@ dependencies {
 
     implementation(libs.glide)
 
+    implementation (libs.justifiedtextview)
+
 
 }
