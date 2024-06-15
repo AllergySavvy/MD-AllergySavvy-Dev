@@ -68,5 +68,9 @@
     <string name="set_favorite_ingredient">Set Favorite Ingredient</string>
     <string name="username">Username</string>
     <string name="user_bio">User Bio</string>
+    <string name="duration">Duration</string>
+    <string name="views">Views</string>
+    <string name="chanel_video">Chanel Video</string>
+    <string name="thumbnail_video">Thumbnail Video</string>
 
 </resources>
