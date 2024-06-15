@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.capstone.allergysavvy.data.response.Video
 import com.capstone.allergysavvy.databinding.ItemVideoBinding
 import com.capstone.allergysavvy.utils.formatDuration
+import com.capstone.allergysavvy.utils.formatViewsVideo
 
 class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
@@ -29,7 +30,7 @@ class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLB
 
         fun bind(video: Video) {
             with(binding) {
-                tvViewsVideo.text = video.viewCount
+                tvViewsVideo.text = formatViewsVideo(video.viewCount)
                 tvTitleVideo.text = video.title
                 tvChanelName.text = video.channelTitle
                 tvDuration.text = formatDuration(video.duration)
