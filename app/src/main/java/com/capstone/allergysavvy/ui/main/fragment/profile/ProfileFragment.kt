@@ -17,6 +17,7 @@ import com.capstone.allergysavvy.databinding.FragmentProfileBinding
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 import com.capstone.allergysavvy.ui.welcome.WelcomeActivity
+import com.google.android.material.snackbar.Snackbar
 
 class ProfileFragment : Fragment() {
 
@@ -42,6 +43,17 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupActionTheme()
         setupLogout()
+        setupEditProfile()
+    }
+
+    private fun setupEditProfile() {
+        binding.btnEditProfileFragmentProfile.setOnClickListener {
+            Snackbar.make(
+                binding.root,
+                "Profile editing feature is not yet available",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun setupActionTheme() {

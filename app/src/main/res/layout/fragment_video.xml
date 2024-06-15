@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/ti_search_recipe_video"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -32,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title_fragment_video">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_search_recipe_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/backround_round_search_bar"
@@ -48,9 +49,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/ti_search_recipe_video"
+        app:layout_constraintStart_toStartOf="@+id/ti_search_recipe_video"
+        app:layout_constraintTop_toBottomOf="@+id/ti_search_recipe_video"
         tools:listitem="@layout/item_video" />
 
     <ProgressBar
@@ -62,6 +63,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/ti_search_recipe_video" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

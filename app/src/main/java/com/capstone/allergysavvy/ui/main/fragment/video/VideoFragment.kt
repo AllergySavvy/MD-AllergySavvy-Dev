@@ -73,6 +73,20 @@ class VideoFragment : Fragment() {
                 }
             }
         }
+
+        binding.edSearchRecipeVideo.setOnClickListener {
+            val searchQuery = "${binding.edSearchRecipeVideo.text.toString()} + tutorial recipes"
+            if (searchQuery.isNotEmpty()) {
+                videoViewModel.searchVideo(searchQuery)
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    "Please enter a recipe name",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
+
     }
 
     override fun onDestroyView() {
