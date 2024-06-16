@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.fragment.profile.editprofile.EditProfileActivity">
+
+
+    <TextView
+        android:id="@+id/tv_title_edit_profile_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/title_edit_profile_activity"
+        android:textColor="@color/dark_green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_photo_profile"
+        android:layout_width="145dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/light_green"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_edit_profile_activity"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_edit_profile_activity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_edit_profile_activity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_photo_profile_edit_profile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="15dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/CardRadius15"
+                app:srcCompat="@drawable/default_photo_profile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_username_edit_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:enabled="false"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeColor="@color/dark_green"
+        app:boxStrokeWidth="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_edit_username_profile"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon_username_edit_profile"
+        app:layout_constraintTop_toBottomOf="@+id/cv_photo_profile">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_username_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:text="@string/username" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/iv_icon_username_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:contentDescription="@string/icon_username_edit_profile"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_edit_profile_activity"
+        app:layout_constraintTop_toBottomOf="@+id/cv_photo_profile"
+        app:srcCompat="@drawable/icon_username_edit_profile" />
+
+    <ImageButton
+        android:id="@+id/button_edit_username_profile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="65dp"
+        android:background="@drawable/background_button_transparent"
+        android:contentDescription="@string/edit_username_profile"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_edit_profile_activity"
+        app:layout_constraintTop_toBottomOf="@+id/cv_photo_profile"
+        app:srcCompat="@drawable/icon_edit_pen_profile" />
+
+    <ImageView
+        android:id="@+id/iv_icon_username_info_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/icon_user_info"
+        app:layout_constraintStart_toStartOf="@+id/iv_icon_username_edit_profile"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_username_edit_profile"
+        app:srcCompat="@drawable/icon_info_user_edit_profile" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_user_info_edit_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:enabled="false"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeColor="@color/dark_green"
+        app:boxStrokeWidth="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/ti_username_edit_profile"
+        app:layout_constraintStart_toStartOf="@+id/ti_username_edit_profile"
+        app:layout_constraintTop_toBottomOf="@+id/ti_username_edit_profile">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_user_info_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/info"
+            android:text="@string/user_info" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/button_edit_user_info_user_profile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/background_button_transparent"
+        android:contentDescription="@string/edit_user_info"
+        app:layout_constraintEnd_toEndOf="@+id/button_edit_username_profile"
+        app:layout_constraintStart_toStartOf="@+id/button_edit_username_profile"
+        app:layout_constraintTop_toBottomOf="@+id/button_edit_username_profile"
+        app:srcCompat="@drawable/icon_edit_pen_profile" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -94,5 +94,12 @@
     <string name="icon_form_ingredient">Icon form ingredient</string>
     <string name="let_us_know_we_ll_recommend_recipes_that_are_safe_for_you">Let us know, we\'ll recommend recipes that are safe for you.</string>
     <string name="please_enter_the_ingredients_of_your_allergy_food">Please enter the ingredients of your allergy food</string>
+    <string name="title_edit_profile_activity">Edit Profile</string>
+    <string name="icon_username_edit_profile">Icon username edit profile</string>
+    <string name="edit_username_profile">Edit username profile</string>
+    <string name="edit_user_info">Edit user info</string>
+    <string name="info">Info</string>
+    <string name="user_info">User info</string>
+    <string name="icon_user_info">Icon user info</string>
 
 </resources>
