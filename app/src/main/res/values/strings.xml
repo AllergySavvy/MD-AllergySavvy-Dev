@@ -91,5 +91,8 @@
     <string name="save_favorite_recipes">Save favorite recipes</string>
     <string name="back_button_description">Back to list recipes</string>
     <string name="hello">Hello,</string>
+    <string name="icon_form_ingredient">Icon form ingredient</string>
+    <string name="let_us_know_we_ll_recommend_recipes_that_are_safe_for_you">Let us know, we\'ll recommend recipes that are safe for you.</string>
+    <string name="please_enter_the_ingredients_of_your_allergy_food">Please enter the ingredients of your allergy food</string>
 
 </resources>
