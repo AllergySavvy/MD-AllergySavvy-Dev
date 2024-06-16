@@ -49,8 +49,10 @@ class WelcomeActivity : AppCompatActivity() {
         settingViewModel.getThemeSetting().observe(this) { darkModeActive ->
             if (darkModeActive) {
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+                binding.ivLogoWelcome.setImageResource(R.drawable.logo_allergysavvy_dark_mode_svg)
             } else {
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+                binding.ivLogoWelcome.setImageResource(R.drawable.logo_allergysavvy_svg)
             }
         }
     }
