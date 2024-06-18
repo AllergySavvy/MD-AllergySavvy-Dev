@@ -55,7 +55,8 @@ class VideoFragment : Fragment() {
 
     private fun searchVideo() {
         binding.edSearchRecipeVideo.setOnClickListener {
-            val searchQuery = "${binding.edSearchRecipeVideo.text.toString()} + tutorial recipes"
+            val searchQuery =
+                "${binding.edSearchRecipeVideo.text.toString()} + tutorial food recipes"
             if (searchQuery.isNotEmpty()) {
                 lifecycleScope.launch {
                     videoViewModel.searchVideo(searchQuery).asFlow().collectLatest { pagingData ->
