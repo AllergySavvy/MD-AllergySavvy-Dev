@@ -101,5 +101,10 @@
     <string name="info">Info</string>
     <string name="user_info">User info</string>
     <string name="icon_user_info">Icon user info</string>
+    <string name="error_photo_message">Error photo message</string>
+    <string name="sorry_there_was_an_error_unable_to_load_video">Sorry there was an error unable to load video</string>
+    <string name="oops">Oops!</string>
+    <string name="error_message">Error message</string>
+    <string name="try_again">Try Again</string>
 
 </resources>

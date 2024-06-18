@@ -8,11 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.allergysavvy.databinding.FragmentVideoBinding
 import com.capstone.allergysavvy.di.Injection
-import com.capstone.allergysavvy.ui.adapter.VideoAdapter
 import com.capstone.allergysavvy.ui.adapter.LoadingStateAdapter
+import com.capstone.allergysavvy.ui.adapter.VideoAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -37,8 +38,10 @@ class VideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupProgressBarAndErrorMassageVideo()
         searchVideo()
     }
+
 
     private fun setupRecyclerView() {
         videoAdapter = VideoAdapter()
@@ -61,7 +64,8 @@ class VideoFragment : Fragment() {
 
     private fun searchVideo() {
         binding.edSearchRecipeVideo.setOnClickListener {
-            val searchQuery = "${binding.edSearchRecipeVideo.text.toString()} + tutorial food recipes"
+            val searchQuery =
+                "${binding.edSearchRecipeVideo.text.toString()} + tutorial food recipes"
             if (searchQuery.isNotEmpty()) {
                 lifecycleScope.launch {
                     videoViewModel.searchVideo(searchQuery).asFlow().collectLatest { pagingData ->
@@ -71,6 +75,33 @@ class VideoFragment : Fragment() {
             } else {
                 Snackbar.make(binding.root, "Please enter a search query", Snackbar.LENGTH_SHORT)
                     .show()
+            }
+        }
+    }
+
+    private fun setupProgressBarAndErrorMassageVideo() {
+        videoAdapter.addLoadStateListener { loadState ->
+            binding.progressBarVideo.visibility =
+                if (loadState.source.refresh is LoadState.Loading) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.source.refresh as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+
+            if (errorState != null) {
+                binding.ivErrorImageFragmentVideo.visibility = View.VISIBLE
+                binding.tvOopsFragmentVideo.visibility = View.VISIBLE
+                binding.tvSoryMessageVideoFragment.visibility = View.VISIBLE
+            } else {
+                binding.ivErrorImageFragmentVideo.visibility = View.GONE
+                binding.tvOopsFragmentVideo.visibility = View.GONE
+                binding.tvSoryMessageVideoFragment.visibility = View.GONE
             }
         }
     }
