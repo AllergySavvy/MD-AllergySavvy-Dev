@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.allergysavvy.databinding.FragmentVideoBinding
 import com.capstone.allergysavvy.di.Injection
 import com.capstone.allergysavvy.ui.adapter.VideoAdapter
+import com.capstone.allergysavvy.ui.adapter.LoadingStateAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,6 +24,7 @@ class VideoFragment : Fragment() {
     private val videoViewModel: VideoViewModel by viewModels {
         VideoViewModelFactory.getInstance(videoRepository)
     }
+    private lateinit var videoAdapter: VideoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +41,13 @@ class VideoFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val videoAdapter = VideoAdapter()
+        videoAdapter = VideoAdapter()
         binding.rvVideoYoutube.apply {
-            adapter = videoAdapter
+            adapter = videoAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    videoAdapter.retry()
+                }
+            )
             layoutManager = LinearLayoutManager(context)
         }
 
@@ -55,12 +61,11 @@ class VideoFragment : Fragment() {
 
     private fun searchVideo() {
         binding.edSearchRecipeVideo.setOnClickListener {
-            val searchQuery =
-                "${binding.edSearchRecipeVideo.text.toString()} + tutorial food recipes"
+            val searchQuery = "${binding.edSearchRecipeVideo.text.toString()} + tutorial food recipes"
             if (searchQuery.isNotEmpty()) {
                 lifecycleScope.launch {
                     videoViewModel.searchVideo(searchQuery).asFlow().collectLatest { pagingData ->
-                        (binding.rvVideoYoutube.adapter as VideoAdapter).submitData(pagingData)
+                        videoAdapter.submitData(pagingData)
                     }
                 }
             } else {
