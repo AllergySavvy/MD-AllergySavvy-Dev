@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.allergysavvy.data.Result
 import com.capstone.allergysavvy.databinding.FragmentVideoBinding
 import com.capstone.allergysavvy.di.Injection
 import com.capstone.allergysavvy.ui.adapter.VideoAdapter
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class VideoFragment : Fragment() {
     private var _binding: FragmentVideoBinding? = null
@@ -31,15 +34,8 @@ class VideoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkVideo()
         setupRecyclerView()
         searchVideo()
-    }
-
-    private fun checkVideo() {
-        if (videoViewModel.videos.value == null) {
-            videoViewModel.searchVideo("How To Make Healthy Food Recipes")
-        }
     }
 
     private fun setupRecyclerView() {
@@ -48,45 +44,29 @@ class VideoFragment : Fragment() {
             adapter = videoAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        lifecycleScope.launch {
+            videoViewModel.searchVideo("How To Make Healthy Food Recipes").asFlow()
+                .collectLatest { pagingData ->
+                    videoAdapter.submitData(pagingData)
+                }
+        }
     }
 
     private fun searchVideo() {
-        videoViewModel.videos.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    binding.progressBarVideo.visibility = View.VISIBLE
-                }
-
-                is Result.Error -> {
-                    binding.progressBarVideo.visibility = View.GONE
-                    Snackbar.make(
-                        binding.root,
-                        "Error finding video: ${result.error}",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBarVideo.visibility = View.GONE
-                    val videoAdapter = binding.rvVideoYoutube.adapter as VideoAdapter
-                    videoAdapter.submitList(result.data)
-                }
-            }
-        }
-
         binding.edSearchRecipeVideo.setOnClickListener {
             val searchQuery = "${binding.edSearchRecipeVideo.text.toString()} + tutorial recipes"
             if (searchQuery.isNotEmpty()) {
-                videoViewModel.searchVideo(searchQuery)
+                lifecycleScope.launch {
+                    videoViewModel.searchVideo(searchQuery).asFlow().collectLatest { pagingData ->
+                        (binding.rvVideoYoutube.adapter as VideoAdapter).submitData(pagingData)
+                    }
+                }
             } else {
-                Snackbar.make(
-                    binding.root,
-                    "Please enter a recipe name",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                Snackbar.make(binding.root, "Please enter a search query", Snackbar.LENGTH_SHORT)
+                    .show()
             }
         }
-
     }
 
     override fun onDestroyView() {

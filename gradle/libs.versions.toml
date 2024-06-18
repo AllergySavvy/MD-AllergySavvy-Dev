@@ -9,6 +9,7 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.7.0"
+kotlinxCoroutinesCore = "1.7.3"
 listenablefuture = "9999.0-empty-to-avoid-conflict-with-guava"
 material = "1.12.0"
 activity = "1.9.0"
@@ -40,6 +41,8 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 justifiedtextview = { module = "com.codesgood:justifiedtextview", version.ref = "justifiedtextview" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 listenablefuture = { module = "com.google.guava:listenablefuture", version.ref = "listenablefuture" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
