@@ -4,7 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
@@ -12,9 +16,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.SettingPreference
+import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.ActivityLoginBinding
-import com.capstone.allergysavvy.ui.category.CategoryActivity
+import com.capstone.allergysavvy.ui.main.MainActivity
 import com.capstone.allergysavvy.ui.register.RegisterActivity
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
@@ -38,11 +43,14 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-        val factoryResult: LoginViewModelFactory = LoginViewModelFactory.getInstance(application)
+        val userPref = UserPreference.getInstance(application.dataStore)
+        val factoryResult: LoginViewModelFactory =
+            LoginViewModelFactory.getInstance(application, userPref)
         loginViewModel = ViewModelProvider(this, factoryResult)[LoginViewModel::class.java]
 
         setupAction()
         textObserver()
+        observeViewModel()
     }
 
 
@@ -123,9 +131,53 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+    private fun observeViewModel() {
+        loginViewModel.showSuccessDialog.observe(this) {
+            showDialog(it)
+        }
+
+        loginViewModel.showErrorDialog.observe(this) {
+            showDialog(it)
+        }
+
+        loginViewModel.loading.observe(this) {
+            if (it) {
+                binding.progressBarLogin.visibility = View.VISIBLE
+                binding.overlayLogin.visibility = View.VISIBLE
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                )
+            } else {
+                binding.progressBarLogin.visibility = View.GONE
+                binding.overlayLogin.visibility = View.GONE
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            }
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun showDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                finish()
+            }
+            .setCancelable(false)
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
+        messageView?.setTextColor(resources.getColor(R.color.black))
+        alertDialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
     private fun loginUser(email: String, password: String) {
-        val intent = Intent(this@LoginActivity, CategoryActivity::class.java)
-        startActivity(intent)
-        finish()
+        loginViewModel.loginUser(email, password)
     }
 }
