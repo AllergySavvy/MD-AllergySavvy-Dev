@@ -29,6 +29,12 @@ android {
             "API_KEY_YOUTUBE",
             "\"AIzaSyDsGI92Dq-gdj8ha4wbTpsQZNEtdwbaDOQ\""
         )
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"localhost:3000/api/v1/\""
+        )
     }
 
     buildTypes {
