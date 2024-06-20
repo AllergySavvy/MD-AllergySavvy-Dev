@@ -1,6 +1,6 @@
 package com.capstone.allergysavvy.ui.main.fragment.home
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,6 @@ import com.capstone.allergysavvy.data.Result
 import com.capstone.allergysavvy.databinding.FragmentHomeBinding
 import com.capstone.allergysavvy.ui.adapter.FoodRecipeRandomAdapter
 import com.capstone.allergysavvy.ui.adapter.IngredientRandomAdapter
-import com.capstone.allergysavvy.ui.category.form.FormActivity
 import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
@@ -38,11 +37,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkDarkMode()
-        checkUserAllergies()
         setupRecyclerView()
         setupObserver()
-
-
     }
 
 
@@ -59,6 +55,7 @@ class HomeFragment : Fragment() {
         binding.rvRecentIngredient.adapter = IngredientRandomAdapter()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupObserver() {
         homeViewModel.foodRecipeRandom.observe(viewLifecycleOwner) {
             when (it) {
@@ -89,16 +86,9 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-    }
 
-
-    private fun checkUserAllergies() {
-        homeViewModel.checkUserAllergies()
-        if (homeViewModel.isUserAllergies.value == true) {
-            val intent = Intent(requireContext(), FormActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            activity?.finish()
+        homeViewModel.username.observe(viewLifecycleOwner) {
+            binding.tvUsernameHomeFragment.text = it
         }
     }
 

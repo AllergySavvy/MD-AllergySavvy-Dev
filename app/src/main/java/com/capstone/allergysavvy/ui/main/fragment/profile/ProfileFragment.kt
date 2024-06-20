@@ -14,7 +14,6 @@ import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.SettingPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.FragmentProfileBinding
-import com.capstone.allergysavvy.ui.main.fragment.profile.editprofile.EditProfileActivity
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 import com.capstone.allergysavvy.ui.welcome.WelcomeActivity
@@ -46,16 +45,16 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupActionTheme()
+        getUserName()
         setupLogout()
-        setupEditProfile()
     }
 
-    private fun setupEditProfile() {
-        binding.btnEditProfileFragmentProfile.setOnClickListener {
-            val intent = Intent(requireContext(), EditProfileActivity::class.java)
-            startActivity(intent)
+    private fun getUserName() {
+        profileViewModel.userName.observe(viewLifecycleOwner) {
+            binding.tvUsernameProfileFragment.text = it
         }
     }
+
 
     private fun setupActionTheme() {
         binding.btnEditThemeFragmentProfile.setOnClickListener {

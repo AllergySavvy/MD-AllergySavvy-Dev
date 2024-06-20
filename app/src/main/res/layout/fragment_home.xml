@@ -23,6 +23,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_username_home_fragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/inter"
+            android:text="@string/username"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_welcome_user_home_fragment"
+            app:layout_constraintTop_toTopOf="@+id/tv_welcome_user_home_fragment" />
+
         <ImageView
             android:id="@+id/iv_shape_image_banner_home_fragment"
             android:layout_width="300dp"

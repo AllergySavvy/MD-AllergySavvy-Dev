@@ -61,41 +61,35 @@ class FormActivity : AppCompatActivity() {
     }
 
     private fun validateInput() {
-        val ingredient1 = binding.edAllergyIngredient1.text.toString()
-        val ingredient2 = binding.edAllergyIngredient2.text.toString()
-        val ingredient3 = binding.edAllergyIngredient3.text.toString()
+        val ingredient = binding.edAllergyIngredient1.text.toString()
 
         when {
-            ingredient1.isEmpty() -> {
+            ingredient.isEmpty() -> {
                 binding.tiAllergyIngredient1.error = "Please enter ingredient here"
             }
 
             else -> with(binding) {
                 tiAllergyIngredient1.error = null
-                tiAllergyIngredient2.error = null
-                tiAllergyIngredient3.error = null
-                showDialogConfirmation(ingredient1, ingredient2, ingredient3)
+                showDialogConfirmation(ingredient)
             }
         }
     }
 
     private fun showDialogConfirmation(
-        ingredient1: String,
-        ingredient2: String?,
-        ingredient3: String?
+        ingredient: String
     ) {
         AlertDialog.Builder(this)
             .setTitle("Confirmation")
-            .setMessage("Are you sure you want to submit your allergy food ingredients?\n\n${ingredient1}\n${ingredient2}\n${ingredient3}")
+            .setMessage("Are you sure you want to submit your allergy food ingredients?\n\n${ingredient}")
             .setPositiveButton("Confirm") { _, _ ->
-                inputIngredient(ingredient1, ingredient2, ingredient3)
+                inputIngredient(ingredient)
             }
             .setNegativeButton("Cancel", null)
             .create()
             .show()
     }
 
-    private fun inputIngredient(ingredient1: String, ingredient2: String?, ingredient3: String?) {
+    private fun inputIngredient(ingredient: String) {
         val intent = Intent(this@FormActivity, MainActivity::class.java)
         startActivity(intent)
         finish()

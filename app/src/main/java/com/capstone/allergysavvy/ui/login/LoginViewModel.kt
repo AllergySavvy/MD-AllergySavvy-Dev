@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.capstone.allergysavvy.data.local.pref.UserPreference
-import com.capstone.allergysavvy.data.repository.GetUserDataRepository
 import com.capstone.allergysavvy.data.repository.LoginRepository
 import kotlinx.coroutines.launch
 import org.apache.http.HttpException
@@ -14,7 +13,6 @@ import org.apache.http.HttpException
 class LoginViewModel(
     application: Application,
     private val loginRepository: LoginRepository,
-    private val getUserDataRepository: GetUserDataRepository,
     private val userPreference: UserPreference
 ) : AndroidViewModel(application) {
 
@@ -30,27 +28,18 @@ class LoginViewModel(
     val loading: LiveData<Boolean>
         get() = _loading
 
-    private val _isUserAllergies = MutableLiveData<Boolean>()
-    val isUserAllergies: LiveData<Boolean>
-        get() = _isUserAllergies
-
     fun loginUser(email: String, password: String) {
         _loading.value = true
         viewModelScope.launch {
             try {
                 val response = loginRepository.login(email, password)
                 val userToken = response.token
+                val userName = response.data?.username
                 _loading.postValue(false)
                 _showSuccessDialog.postValue(response.message.toString())
                 userToken?.let { token ->
-                    saveUserData(token)
-                    val responseUserData = getUserDataRepository.getUserData()
-                    val loginResult = responseUserData.data
-                    val userAllergies = loginResult?.userAllergies
-                    if (userAllergies != null) {
-                        _isUserAllergies.postValue(true)
-                    } else {
-                        _isUserAllergies.postValue(false)
+                    userName?.let { name ->
+                        saveUserData(token, name)
                     }
                 }
             } catch (e: Exception) {
@@ -65,10 +54,9 @@ class LoginViewModel(
         }
     }
 
-    private fun saveUserData(userToken: String) {
+    private fun saveUserData(userToken: String, userName: String) {
         viewModelScope.launch {
-            userPreference.saveUserToken(userToken)
+            userPreference.saveUserData(userToken, userName)
         }
     }
-
 }

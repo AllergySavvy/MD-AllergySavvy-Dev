@@ -68,4 +68,8 @@ object Injection {
         val apiService = ApiConfig.getApiService(user)
         return FoodDetailRepository.getInstance(apiService)
     }
+
+    fun userPreference(context: Context): UserPreference {
+        return UserPreference.getInstance(context.dataStore)
+    }
 }

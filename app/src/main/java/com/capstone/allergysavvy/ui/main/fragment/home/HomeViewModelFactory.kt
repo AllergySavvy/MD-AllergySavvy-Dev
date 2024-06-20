@@ -3,13 +3,13 @@ package com.capstone.allergysavvy.ui.main.fragment.home
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.repository.FoodRecipeRandomRepository
-import com.capstone.allergysavvy.data.repository.GetUserDataRepository
 import com.capstone.allergysavvy.data.repository.RandomIngredientRepository
 import com.capstone.allergysavvy.di.Injection
 
 class HomeViewModelFactory private constructor(
-    private val userDataRepository: GetUserDataRepository,
+    private val userPreference: UserPreference,
     private val foodRecipeRandomRepository: FoodRecipeRandomRepository,
     private val ingredientRandomRepository: RandomIngredientRepository
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -18,7 +18,7 @@ class HomeViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(
-                userDataRepository,
+                userPreference,
                 foodRecipeRandomRepository,
                 ingredientRandomRepository
             ) as T
@@ -35,7 +35,7 @@ class HomeViewModelFactory private constructor(
         ): HomeViewModelFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: HomeViewModelFactory(
-                    Injection.getUserDataRepository(context),
+                    Injection.userPreference(context),
                     Injection.foodRecipeRandomRepository(context),
                     Injection.randomIngredientRepository(context)
                 )

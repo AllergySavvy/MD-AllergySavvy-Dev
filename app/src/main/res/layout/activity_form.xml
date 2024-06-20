@@ -64,69 +64,19 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_allergy_ingredient_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            app:boxStrokeColor="@color/dark_green"
-            app:boxStrokeWidth="3dp"
-            app:layout_constraintEnd_toEndOf="@+id/ti_allergy_ingredient_1"
-            app:layout_constraintStart_toStartOf="@+id/ti_allergy_ingredient_1"
-            app:layout_constraintTop_toBottomOf="@+id/ti_allergy_ingredient_1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_allergy_ingredient_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/enter_ingredient_hint"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_allergy_ingredient_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            app:boxStrokeColor="@color/dark_green"
-            app:boxStrokeWidth="3dp"
-            app:layout_constraintEnd_toEndOf="@+id/ti_allergy_ingredient_2"
-            app:layout_constraintStart_toStartOf="@+id/ti_allergy_ingredient_2"
-            app:layout_constraintTop_toBottomOf="@+id/ti_allergy_ingredient_2">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_allergy_ingredient_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/enter_ingredient_hint"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <Button
             android:id="@+id/btn_send_ingredient_form"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/next"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/ti_allergy_ingredient_3"
-            app:layout_constraintStart_toStartOf="@+id/ti_allergy_ingredient_3"
-            app:layout_constraintTop_toBottomOf="@+id/ti_allergy_ingredient_3"
+            app:layout_constraintEnd_toEndOf="@+id/ti_allergy_ingredient_1"
+            app:layout_constraintStart_toStartOf="@+id/ti_allergy_ingredient_1"
+            app:layout_constraintTop_toBottomOf="@+id/ti_allergy_ingredient_1"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView

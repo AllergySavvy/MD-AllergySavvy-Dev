@@ -14,15 +14,22 @@ class UserPreference private constructor(
     private val dataStore: DataStore<Preferences>
 ) {
     private val userToken = stringPreferencesKey("user_token")
+    private val userName = stringPreferencesKey("user_name")
 
     suspend fun getUserToken(): String {
         val preferences = dataStore.data.first()
         return preferences[userToken] ?: ""
     }
 
-    suspend fun saveUserToken(token: String) {
+    suspend fun getUserName(): String {
+        val preferences = dataStore.data.first()
+        return preferences[userName] ?: ""
+    }
+
+    suspend fun saveUserData(token: String, username: String) {
         dataStore.edit {
             it[userToken] = token
+            it[userName] = username
         }
     }
 

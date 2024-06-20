@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="200dp"
+    android:layout_height="210dp"
     android:layout_margin="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -41,6 +42,7 @@
             android:text="@string/recipes_name"
             android:textAlignment="center"
             android:textColor="@color/black"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/iv_recipes_image"
             app:layout_constraintStart_toStartOf="@+id/iv_recipes_image"

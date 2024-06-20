@@ -6,22 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.allergysavvy.data.Result
+import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.repository.FoodRecipeRandomRepository
-import com.capstone.allergysavvy.data.repository.GetUserDataRepository
 import com.capstone.allergysavvy.data.repository.RandomIngredientRepository
 import com.capstone.allergysavvy.data.response.DataItemFoodRandom
 import com.capstone.allergysavvy.data.response.DataItemIngredientRandom
 import kotlinx.coroutines.launch
-import org.apache.http.HttpException
 
 class HomeViewModel(
-    private val userDataRepository: GetUserDataRepository,
+    private val userPreference: UserPreference,
     private val foodRecipeRandomRepository: FoodRecipeRandomRepository,
     private val ingredientRandomRepository: RandomIngredientRepository
 ) : ViewModel() {
-    private val _isUserAllergies = MutableLiveData<Boolean>()
-    val isUserAllergies: LiveData<Boolean>
-        get() = _isUserAllergies
 
     private val _foodRecipeRandom = MutableLiveData<Result<List<DataItemFoodRandom?>>>()
     val foodRecipeRandom: LiveData<Result<List<DataItemFoodRandom?>>>
@@ -30,6 +26,20 @@ class HomeViewModel(
     private val _ingredientRandom = MutableLiveData<Result<List<DataItemIngredientRandom?>>>()
     val ingredientRandom: LiveData<Result<List<DataItemIngredientRandom?>>>
         get() = _ingredientRandom
+
+    private val _userName = MutableLiveData<String>()
+    val username: LiveData<String>
+        get() = _userName
+
+    init {
+        getUserName()
+    }
+
+    private fun getUserName() {
+        viewModelScope.launch {
+            _userName.value = userPreference.getUserName()
+        }
+    }
 
     fun findFoodRandom() {
         viewModelScope.launch {
@@ -55,22 +65,6 @@ class HomeViewModel(
         }
     }
 
-
-    fun checkUserAllergies() {
-        viewModelScope.launch {
-            try {
-                val responseUserData = userDataRepository.getUserData()
-                val userDataResult = responseUserData.data
-                val userAllergies = userDataResult?.userAllergies
-                _isUserAllergies.value = userAllergies != null
-            } catch (e: Exception) {
-                val errorMessage = e.message
-            } catch (e: HttpException) {
-                val errorMessage = e.message
-            }
-
-        }
-    }
 
     companion object {
         const val TAG = "HomeViewModel"
