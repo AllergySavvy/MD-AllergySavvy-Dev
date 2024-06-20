@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.allergysavvy.data.repository.IngredientRepository
 import com.capstone.allergysavvy.di.Injection
-import com.capstone.allergysavvy.ui.main.fragment.home.HomeViewModel
 
 class IngredientViewModelFactory(
     private val ingredientRepository: IngredientRepository
@@ -14,7 +13,7 @@ class IngredientViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(IngredientViewModel::class.java)) {
-            return HomeViewModel() as T
+            return IngredientViewModel(ingredientRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class " + modelClass.name)
     }

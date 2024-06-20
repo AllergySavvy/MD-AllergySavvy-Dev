@@ -19,6 +19,7 @@ import com.capstone.allergysavvy.data.local.pref.SettingPreference
 import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.ActivityLoginBinding
+import com.capstone.allergysavvy.ui.category.form.FormActivity
 import com.capstone.allergysavvy.ui.main.MainActivity
 import com.capstone.allergysavvy.ui.register.RegisterActivity
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
@@ -27,6 +28,8 @@ import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private var isUserAllergies: Boolean? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -154,6 +157,10 @@ class LoginActivity : AppCompatActivity() {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
         }
+
+        loginViewModel.isUserAllergies.observe(this) {
+            isUserAllergies = it
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -162,11 +169,7 @@ class LoginActivity : AppCompatActivity() {
             .setMessage(message)
             .setPositiveButton("Confirm") { dialog, _ ->
                 dialog.dismiss()
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
-                startActivity(intent)
-                finish()
+                userLoginMoveNextActivity()
             }
             .setCancelable(false)
         val alertDialog = builder.create()
@@ -193,5 +196,21 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser(email: String, password: String) {
         loginViewModel.loginUser(email, password)
+    }
+
+    private fun userLoginMoveNextActivity() {
+        if (isUserAllergies == true) {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+            finish()
+        } else {
+            val intent = Intent(this, FormActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+            finish()
+        }
     }
 }

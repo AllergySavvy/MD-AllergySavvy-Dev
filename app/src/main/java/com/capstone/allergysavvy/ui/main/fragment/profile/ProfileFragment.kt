@@ -28,6 +28,10 @@ class ProfileFragment : Fragment() {
         SettingViewModelFactory(SettingPreference.getInstance(requireContext().dataStore))
     }
 
+    private val profileViewModel: ProfileViewModel by viewModels {
+        ProfileViewModelFactory.getInstance(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,6 +74,7 @@ class ProfileFragment : Fragment() {
             setTitle("Logout")
             setMessage("Are you sure want to logout?")
             setPositiveButton("Yes") { _, _ ->
+                profileViewModel.logout()
                 val intent = Intent(requireContext(), WelcomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

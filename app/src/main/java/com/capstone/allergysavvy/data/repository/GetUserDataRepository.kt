@@ -1,27 +1,24 @@
 package com.capstone.allergysavvy.data.repository
 
-import com.capstone.allergysavvy.data.response.LoginResponse
 import com.capstone.allergysavvy.data.response.UserDataResponse
 import com.capstone.allergysavvy.data.retrofit.ApiService
 
-class LoginRepository(
+class GetUserDataRepository(
     private val apiService: ApiService
 ) {
-    suspend fun login(email: String, password: String): LoginResponse {
-        return apiService.loginUser(email = email, password = password)
+    suspend fun getUserData(): UserDataResponse {
+        return apiService.getUserData()
     }
-
-
 
     companion object {
         @Volatile
-        private var INSTANCE: LoginRepository? = null
+        private var INSTANCE: GetUserDataRepository? = null
 
         fun getInstance(
             apiService: ApiService
-        ): LoginRepository =
+        ): GetUserDataRepository =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: LoginRepository(apiService)
+                INSTANCE ?: GetUserDataRepository(apiService)
             }.also { INSTANCE = it }
     }
 }

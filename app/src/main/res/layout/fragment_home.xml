@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="?actionBarSize"
     tools:context=".ui.main.fragment.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -139,6 +140,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_recent_recipes" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

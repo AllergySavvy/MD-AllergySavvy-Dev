@@ -33,7 +33,7 @@ android {
         buildConfigField(
             "String",
             "BASE_URL",
-            "\"localhost:3000/api/v1/\""
+            "\"https://backend-allergysavvy-i2qchuwnia-et.a.run.app/api/v1/\""
         )
     }
 
