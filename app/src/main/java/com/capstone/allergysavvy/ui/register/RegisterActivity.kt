@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
@@ -14,7 +16,6 @@ import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.SettingPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.ActivityRegisterBinding
-import com.capstone.allergysavvy.ui.category.CategoryActivity
 import com.capstone.allergysavvy.ui.login.LoginActivity
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
@@ -48,6 +49,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
         setupAction()
+        viewModelObserver()
         textObserver()
     }
 
@@ -112,6 +114,16 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun viewModelObserver() {
+        registerViewModel.showSuccessDialog.observe(this) {
+            showDialog(it)
+        }
+
+        registerViewModel.showErrorDialog.observe(this) {
+            showErrorDialog(it)
+        }
+    }
+
     private fun textObserver() {
         binding.edEmailRegister.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -149,10 +161,41 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
+    @Suppress("DEPRECATION")
+    private fun showDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            .setCancelable(false)
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
+        messageView?.setTextColor(resources.getColor(R.color.black))
+        alertDialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun showErrorDialog(errorMessage: String) {
+        val builder = AlertDialog.Builder(this)
+            .setMessage(errorMessage)
+            .setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alertDialog = builder.create()
+        alertDialog.show()
+        val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
+        messageView?.setTextColor(resources.getColor(R.color.black))
+        alertDialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
 
     private fun registerUser(username: String, email: String, password: String) {
-        val intent = Intent(this@RegisterActivity, CategoryActivity::class.java)
-        startActivity(intent)
-        finish()
+        registerViewModel.registerUser(name = username, email = email, password = password)
     }
 }

@@ -137,7 +137,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginViewModel.showErrorDialog.observe(this) {
-            showDialog(it)
+            showErrorDialog(it)
         }
 
         loginViewModel.loading.observe(this) {
@@ -172,6 +172,20 @@ class LoginActivity : AppCompatActivity() {
         val alertDialog = builder.create()
         alertDialog.show()
 
+        val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
+        messageView?.setTextColor(resources.getColor(R.color.black))
+        alertDialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun showErrorDialog(errorMessage: String) {
+        val builder = AlertDialog.Builder(this)
+            .setMessage(errorMessage)
+            .setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alertDialog = builder.create()
+        alertDialog.show()
         val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
         messageView?.setTextColor(resources.getColor(R.color.black))
         alertDialog.window?.setBackgroundDrawableResource(R.color.white)

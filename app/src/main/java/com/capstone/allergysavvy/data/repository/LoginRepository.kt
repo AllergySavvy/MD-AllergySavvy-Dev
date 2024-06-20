@@ -7,7 +7,7 @@ class LoginRepository(
     private val apiService: ApiService
 ) {
     suspend fun login(email: String, password: String): LoginResponse {
-        return apiService.loginUser(email, password)
+        return apiService.loginUser(email = email, password = password)
     }
 
     companion object {
