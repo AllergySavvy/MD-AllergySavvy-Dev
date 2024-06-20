@@ -3,6 +3,7 @@ package com.capstone.allergysavvy.di
 import android.content.Context
 import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
+import com.capstone.allergysavvy.data.repository.FoodDetailRepository
 import com.capstone.allergysavvy.data.repository.FoodRecipeRandomRepository
 import com.capstone.allergysavvy.data.repository.GetUserDataRepository
 import com.capstone.allergysavvy.data.repository.IngredientRepository
@@ -59,5 +60,12 @@ object Injection {
         val user = runBlocking { pref.getUserToken() }
         val apiService = ApiConfig.getApiService(user)
         return GetUserDataRepository.getInstance(apiService)
+    }
+
+    fun foodDetailRepository(context: Context): FoodDetailRepository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val user = runBlocking { pref.getUserToken() }
+        val apiService = ApiConfig.getApiService(user)
+        return FoodDetailRepository.getInstance(apiService)
     }
 }

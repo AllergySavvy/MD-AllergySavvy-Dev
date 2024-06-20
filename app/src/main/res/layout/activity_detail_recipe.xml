@@ -59,7 +59,7 @@
             android:background="@drawable/background_information_recipes"
             android:drawablePadding="5dp"
             android:fontFamily="@font/poppins_semibold"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="@string/duration"
             android:textColor="@color/dark_green"
             app:drawableStartCompat="@drawable/icon_duration_recipes"
@@ -73,7 +73,7 @@
             android:layout_marginStart="16dp"
             android:background="@drawable/background_information_recipes"
             android:fontFamily="@font/poppins_semibold"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="@string/location_recipes"
             android:textAlignment="center"
             android:textColor="@color/dark_green"
@@ -82,26 +82,15 @@
             app:layout_constraintStart_toEndOf="@+id/tv_duration_recipes"
             app:layout_constraintTop_toTopOf="@+id/tv_duration_recipes" />
 
-        <com.codesgood.views.JustifiedTextView
-            android:id="@+id/tv_recipes_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="@string/recipes_description"
-            app:layout_constraintEnd_toEndOf="@+id/tv_title_recipes"
-            app:layout_constraintStart_toStartOf="@+id/tv_duration_recipes"
-            app:layout_constraintTop_toBottomOf="@+id/tv_duration_recipes" />
-
         <View
             android:id="@+id/view_line_horizontal"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/line_color"
-            app:layout_constraintEnd_toEndOf="@+id/tv_recipes_description"
-            app:layout_constraintStart_toStartOf="@+id/tv_recipes_description"
-            app:layout_constraintTop_toBottomOf="@+id/tv_recipes_description" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_title_recipes"
+            app:layout_constraintStart_toStartOf="@+id/tv_duration_recipes"
+            app:layout_constraintTop_toBottomOf="@+id/tv_duration_recipes" />
 
         <TextView
             android:id="@+id/tv_title_ingredient_detail_recipes"
@@ -112,11 +101,11 @@
             android:text="@string/ingredients"
             android:textColor="@color/dark_green"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_recipes_description"
-            app:layout_constraintStart_toStartOf="@+id/tv_recipes_description"
+            app:layout_constraintEnd_toEndOf="@+id/view_line_horizontal"
+            app:layout_constraintStart_toStartOf="@+id/view_line_horizontal"
             app:layout_constraintTop_toBottomOf="@+id/view_line_horizontal" />
 
-        <com.codesgood.views.JustifiedTextView
+        <TextView
             android:id="@+id/tv_ingredients_list_detail_recipes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -150,7 +139,7 @@
             app:layout_constraintStart_toStartOf="@+id/view_line_horizontal_2"
             app:layout_constraintTop_toBottomOf="@+id/view_line_horizontal_2" />
 
-        <com.codesgood.views.JustifiedTextView
+        <TextView
             android:id="@+id/tv_steps_list_detail_recipes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -189,5 +178,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icon_back" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_detail_food_recipe"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

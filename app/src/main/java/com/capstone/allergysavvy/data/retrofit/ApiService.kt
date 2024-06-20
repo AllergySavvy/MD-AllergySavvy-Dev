@@ -1,8 +1,21 @@
 package com.capstone.allergysavvy.data.retrofit
 
-import com.capstone.allergysavvy.data.response.*
+import com.capstone.allergysavvy.data.response.FoodDetailResponse
+import com.capstone.allergysavvy.data.response.GetFoodRandomResponse
+import com.capstone.allergysavvy.data.response.LoginResponse
+import com.capstone.allergysavvy.data.response.RegisterResponse
+import com.capstone.allergysavvy.data.response.SearchListResponse
+import com.capstone.allergysavvy.data.response.ShowAllIngredientResponse
+import com.capstone.allergysavvy.data.response.ShowRandomIngredientResponse
+import com.capstone.allergysavvy.data.response.UserDataResponse
+import com.capstone.allergysavvy.data.response.VideoDetailsResponse
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -52,9 +65,9 @@ interface ApiService {
         @Field("user_allergies") userAllergies: String
     ): UserDataResponse
 
-    @GET("food/{id}")
+    @GET("food/{index}")
     suspend fun getFoodRecipesDetail(
-        @Path("id") id: String
+        @Path("index") index: Int
     ): FoodDetailResponse
 
     @GET("food/random")
