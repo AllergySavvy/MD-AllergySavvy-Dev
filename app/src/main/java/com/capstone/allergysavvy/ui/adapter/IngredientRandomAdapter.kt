@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capstone.allergysavvy.data.response.DataItemIngredientRandom
 import com.capstone.allergysavvy.databinding.ItemIngredientBinding
 
-class IngredientAdapter :
-    ListAdapter<DataItemIngredientRandom, IngredientAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class IngredientRandomAdapter :
+    ListAdapter<DataItemIngredientRandom, IngredientRandomAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

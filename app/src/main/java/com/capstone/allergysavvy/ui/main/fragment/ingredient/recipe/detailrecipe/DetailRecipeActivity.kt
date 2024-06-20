@@ -18,4 +18,8 @@ class DetailRecipeActivity : AppCompatActivity() {
             insets
         }
     }
+
+    companion object {
+        const val EXTRA_INDEX = "extra_index"
+    }
 }
