@@ -104,5 +104,8 @@
     <string name="oops">Oops!</string>
     <string name="sorry_the_video_cannot_be_loaded_at_this_time_try_again_later">Sorry, the video cannot be loaded at this time. Try again later</string>
     <string name="icon_error_video_fragment">icon error video fragment</string>
+    <string name="try_again">Try Again</string>
+    <string name="error_messege">Error Messege</string>
+    <string name="error_photo_icon">Error photo icon</string>
 
 </resources>

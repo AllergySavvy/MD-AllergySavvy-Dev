@@ -5,8 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.allergysavvy.data.response.Video
@@ -14,7 +14,7 @@ import com.capstone.allergysavvy.databinding.ItemVideoBinding
 import com.capstone.allergysavvy.utils.formatDuration
 import com.capstone.allergysavvy.utils.formatViewsVideo
 
-class VideoAdapter : PagingDataAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLBACK) {
+class VideoAdapter : ListAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         val binding = ItemVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VideoViewHolder(binding)
@@ -22,7 +22,7 @@ class VideoAdapter : PagingDataAdapter<Video, VideoAdapter.VideoViewHolder>(DIFF
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         val videoData = getItem(position)
-        videoData?.let { holder.bind(it) }
+        holder.bind(videoData)
     }
 
     class VideoViewHolder(private val binding: ItemVideoBinding) :
