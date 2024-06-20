@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ShowRandomIngredientResponse(
 
     @field:SerializedName("data")
-    val data: List<DataItemRandom?>? = null,
+    val data: List<DataItemIngredientRandom?>? = null,
 
     @field:SerializedName("mstatus")
     val mstatus: String? = null,
@@ -14,7 +14,7 @@ data class ShowRandomIngredientResponse(
     val message: String? = null
 )
 
-data class DataItemRandom(
+data class DataItemIngredientRandom(
 
     @field:SerializedName("ingredient")
     val ingredient: String? = null,
