@@ -1,17 +1,21 @@
 package com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.capstone.allergysavvy.data.repository.FoodRecipeRandomRepository
 import com.capstone.allergysavvy.data.repository.RecommendFoodByInputRepository
+import com.capstone.allergysavvy.di.Injection
 
 class RecipeViewModelFactory private constructor(
-    private val recommendFoodByInputRepository: RecommendFoodByInputRepository
+    private val recommendFoodByInputRepository: RecommendFoodByInputRepository,
+    private val foodRandomRepository: FoodRecipeRandomRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {
-            return RecipeViewModel(recommendFoodByInputRepository) as T
+            return RecipeViewModel(recommendFoodByInputRepository, foodRandomRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -21,10 +25,14 @@ class RecipeViewModelFactory private constructor(
         private var INSTACE: RecipeViewModelFactory? = null
 
         fun getInstance(
+            context: Context,
             recommendFoodByInputRepository: RecommendFoodByInputRepository
         ): RecipeViewModelFactory =
             INSTACE ?: synchronized(this) {
-                INSTACE ?: RecipeViewModelFactory(recommendFoodByInputRepository)
+                INSTACE ?: RecipeViewModelFactory(
+                    recommendFoodByInputRepository,
+                    Injection.foodRecipeRandomRepository(context)
+                )
             }.also { INSTACE = it }
     }
 }
