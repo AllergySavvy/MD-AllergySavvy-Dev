@@ -19,5 +19,9 @@ class RecipeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recipe, container, false)
     }
 
+    companion object {
+        const val EXTRA_SELECTED_INGREDIENTS = "extra_selected_ingredients"
+    }
+
 
 }

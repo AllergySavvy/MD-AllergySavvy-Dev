@@ -10,6 +10,7 @@ import com.capstone.allergysavvy.data.repository.IngredientRepository
 import com.capstone.allergysavvy.data.repository.LoginRepository
 import com.capstone.allergysavvy.data.repository.RandomIngredientRepository
 import com.capstone.allergysavvy.data.repository.RegisterRepository
+import com.capstone.allergysavvy.data.repository.SetUserAllergiesRepository
 import com.capstone.allergysavvy.data.repository.VideoRepository
 import com.capstone.allergysavvy.data.retrofit.ApiConfig
 import kotlinx.coroutines.runBlocking
@@ -71,5 +72,12 @@ object Injection {
 
     fun userPreference(context: Context): UserPreference {
         return UserPreference.getInstance(context.dataStore)
+    }
+
+    fun setUserAllergiesRepository(context: Context): SetUserAllergiesRepository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val user = runBlocking { pref.getUserToken() }
+        val apiService = ApiConfig.getApiService(user)
+        return SetUserAllergiesRepository.getInstance(apiService)
     }
 }

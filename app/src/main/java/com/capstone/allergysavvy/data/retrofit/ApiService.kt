@@ -5,6 +5,7 @@ import com.capstone.allergysavvy.data.response.GetFoodRandomResponse
 import com.capstone.allergysavvy.data.response.LoginResponse
 import com.capstone.allergysavvy.data.response.RegisterResponse
 import com.capstone.allergysavvy.data.response.SearchListResponse
+import com.capstone.allergysavvy.data.response.SetUserAllergiesResponse
 import com.capstone.allergysavvy.data.response.ShowAllIngredientResponse
 import com.capstone.allergysavvy.data.response.ShowRandomIngredientResponse
 import com.capstone.allergysavvy.data.response.UserDataResponse
@@ -63,7 +64,7 @@ interface ApiService {
     @POST("user/allergies")
     suspend fun userAllergies(
         @Field("user_allergies") userAllergies: String
-    ): UserDataResponse
+    ): SetUserAllergiesResponse
 
     @GET("food/{index}")
     suspend fun getFoodRecipesDetail(

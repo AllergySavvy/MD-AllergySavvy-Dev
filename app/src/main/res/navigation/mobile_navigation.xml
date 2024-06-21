@@ -26,10 +26,23 @@
         android:id="@+id/navigation_ingredient"
         android:name="com.capstone.allergysavvy.ui.main.fragment.ingredient.IngredientFragment"
         android:label="@string/title_ingredient"
-        tools:layout="@layout/fragment_ingredient" />
+        tools:layout="@layout/fragment_ingredient">
+        <action
+            android:id="@+id/action_navigation_ingredient_to_recipeFragment"
+            app:destination="@id/recipeFragment">
+            <argument
+                android:name="selectedIngredients"
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/navigation_video"
         android:name="com.capstone.allergysavvy.ui.main.fragment.video.VideoFragment"
         android:label="@string/title_video"
         tools:layout="@layout/fragment_video" />
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.RecipeFragment"
+        android:label="fragment_recipe"
+        tools:layout="@layout/fragment_recipe" />
 </navigation>

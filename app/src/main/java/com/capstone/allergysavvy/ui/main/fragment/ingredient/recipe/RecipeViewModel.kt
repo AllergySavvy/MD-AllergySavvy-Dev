@@ -1,4 +1,7 @@
 package com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe
 
-class RecipeViewModel {
+import androidx.lifecycle.ViewModel
+
+class RecipeViewModel
+    : ViewModel() {
 }

@@ -1,12 +1,12 @@
 package com.capstone.allergysavvy.ui.main.fragment.ingredient
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capstone.allergysavvy.databinding.FragmentIngredientBinding
 import com.capstone.allergysavvy.ui.adapter.IngredientAdapter
 import com.capstone.allergysavvy.ui.adapter.LoadingStateAdapter
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.RecipeFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -124,7 +125,13 @@ class IngredientFragment : Fragment() {
 
     private fun sendSelectedIngredients() {
         val selectedIngredients = ingredientAdapter.getSelectedIngredientsString()
-        Toast.makeText(requireContext(), selectedIngredients, Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(requireContext(), RecipeFragment::class.java).apply {
+            putExtra(RecipeFragment.EXTRA_SELECTED_INGREDIENTS, selectedIngredients)
+        }
+
+        startActivity(intent)
+
     }
 
     private fun showSnackBar(message: String) {

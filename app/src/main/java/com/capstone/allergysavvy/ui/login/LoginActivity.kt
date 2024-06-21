@@ -27,7 +27,6 @@ import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
-    private var isUserAllergies: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

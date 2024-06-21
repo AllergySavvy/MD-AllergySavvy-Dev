@@ -2,6 +2,9 @@ package com.capstone.allergysavvy.ui.category.form
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +22,7 @@ import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 
 class FormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormBinding
+    private lateinit var formViewModel: FormViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +37,13 @@ class FormActivity : AppCompatActivity() {
             insets
         }
 
+        val factoryResult: FormViewModelFactory =
+            FormViewModelFactory.getInstance(application)
+        formViewModel = ViewModelProvider(this, factoryResult)[FormViewModel::class.java]
+
         checkThemeSetting()
         setupAction()
+        observerViewModel()
     }
 
 
@@ -50,6 +59,31 @@ class FormActivity : AppCompatActivity() {
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
             } else {
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+            }
+        }
+    }
+
+    private fun observerViewModel() {
+        formViewModel.showSuccessDialog.observe(this) {
+            showDialog(it)
+        }
+
+        formViewModel.showErrorDialog.observe(this) {
+            showErrorDialog(it)
+        }
+
+        formViewModel.loading.observe(this) {
+            if (it) {
+                binding.progressBarForm.visibility = View.VISIBLE
+                binding.overlayForm.visibility = View.VISIBLE
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                )
+            } else {
+                binding.progressBarForm.visibility = View.GONE
+                binding.overlayForm.visibility = View.GONE
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
         }
     }
@@ -75,6 +109,41 @@ class FormActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
+    private fun showDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                finish()
+            }
+            .setCancelable(false)
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
+        messageView?.setTextColor(resources.getColor(R.color.black))
+        alertDialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun showErrorDialog(errorMessage: String) {
+        val builder = AlertDialog.Builder(this)
+            .setMessage(errorMessage)
+            .setPositiveButton("Confirm") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alertDialog = builder.create()
+        alertDialog.show()
+        val messageView = alertDialog.findViewById<TextView>(android.R.id.message)
+        messageView?.setTextColor(resources.getColor(R.color.black))
+        alertDialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
     private fun showDialogConfirmation(
         ingredient: String
     ) {
@@ -89,9 +158,8 @@ class FormActivity : AppCompatActivity() {
             .show()
     }
 
+
     private fun inputIngredient(ingredient: String) {
-        val intent = Intent(this@FormActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        formViewModel.setUserAllergies(ingredient)
     }
 }
