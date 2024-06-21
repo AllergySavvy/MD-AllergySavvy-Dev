@@ -81,4 +81,5 @@ interface ApiService {
         @Field("ingredient") ingredient: String
     ): RecommendFoodByInputResponse
 
+
 }

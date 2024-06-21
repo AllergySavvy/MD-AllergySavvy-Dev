@@ -36,6 +36,10 @@ class RecipeActivity : AppCompatActivity() {
             recipeViewModel.getRecommendFoodByInput(selectedIngredients)
         }
 
+        binding.rvRecipes.layoutManager = LinearLayoutManager(this)
+        val recommendationFoodAdapter = RecommendationFoodAdapter()
+        binding.rvRecipes.adapter = recommendationFoodAdapter
+
         checkThemeSetting()
 
         recipeViewModel.isLoading.observe(this) { isLoading ->
@@ -46,8 +50,7 @@ class RecipeActivity : AppCompatActivity() {
             when (result) {
                 is Result.Success -> {
                     binding.progressBarRecipe.visibility = View.GONE
-                    binding.rvRecipes.layoutManager = LinearLayoutManager(this)
-                    binding.rvRecipes.adapter = RecommendationFoodAdapter()
+                    (binding.rvRecipes.adapter as RecommendationFoodAdapter).submitList(result.data)
                 }
 
                 is Result.Error -> {

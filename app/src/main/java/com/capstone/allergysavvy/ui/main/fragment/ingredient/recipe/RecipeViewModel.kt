@@ -9,6 +9,7 @@ import com.capstone.allergysavvy.data.Result
 import com.capstone.allergysavvy.data.repository.RecommendFoodByInputRepository
 import com.capstone.allergysavvy.data.response.DataItemFoodRecommendationDetail
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 
 class RecipeViewModel(
     private val recommendFoodByInputRepository: RecommendFoodByInputRepository
@@ -26,9 +27,12 @@ class RecipeViewModel(
         _isLoading.postValue(true)
         viewModelScope.launch {
             try {
-                val response = recommendFoodByInputRepository.getRecommendFoodByInput(ingredient)
-                val data = response.data ?: emptyList()
-                _recommendFoodByInput.postValue(Result.Success(data))
+                val result = recommendFoodByInputRepository.getRecommendFoodByInput(ingredient)
+                _recommendFoodByInput.value = result
+            } catch (e: SocketTimeoutException) {
+                _isLoading.postValue(false)
+                _recommendFoodByInput.postValue(Result.Error("Request timed out"))
+                Log.e("RecipeViewModel", "Timeout Error: ${e.message}")
             } catch (e: Exception) {
                 _isLoading.postValue(false)
                 _recommendFoodByInput.postValue(Result.Error(e.message ?: "Unknown Error"))
@@ -38,5 +42,6 @@ class RecipeViewModel(
             }
         }
     }
+
 }
 
