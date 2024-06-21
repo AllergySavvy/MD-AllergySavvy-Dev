@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capstone.allergysavvy.databinding.FragmentIngredientBinding
 import com.capstone.allergysavvy.ui.adapter.IngredientAdapter
 import com.capstone.allergysavvy.ui.adapter.LoadingStateAdapter
-import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.RecipeFragment
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.RecipeActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -125,14 +125,12 @@ class IngredientFragment : Fragment() {
 
     private fun sendSelectedIngredients() {
         val selectedIngredients = ingredientAdapter.getSelectedIngredientsString()
-
-        val intent = Intent(requireContext(), RecipeFragment::class.java).apply {
-            putExtra(RecipeFragment.EXTRA_SELECTED_INGREDIENTS, selectedIngredients)
+        val intent = Intent(requireContext(), RecipeActivity::class.java).apply {
+            putExtra(RecipeActivity.EXTRA_SELECTED_INGREDIENTS, selectedIngredients)
         }
-
         startActivity(intent)
-
     }
+
 
     private fun showSnackBar(message: String) {
         Snackbar.make(

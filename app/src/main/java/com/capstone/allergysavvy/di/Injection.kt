@@ -9,6 +9,7 @@ import com.capstone.allergysavvy.data.repository.GetUserDataRepository
 import com.capstone.allergysavvy.data.repository.IngredientRepository
 import com.capstone.allergysavvy.data.repository.LoginRepository
 import com.capstone.allergysavvy.data.repository.RandomIngredientRepository
+import com.capstone.allergysavvy.data.repository.RecommendFoodByInputRepository
 import com.capstone.allergysavvy.data.repository.RegisterRepository
 import com.capstone.allergysavvy.data.repository.SetUserAllergiesRepository
 import com.capstone.allergysavvy.data.repository.VideoRepository
@@ -79,5 +80,12 @@ object Injection {
         val user = runBlocking { pref.getUserToken() }
         val apiService = ApiConfig.getApiService(user)
         return SetUserAllergiesRepository.getInstance(apiService)
+    }
+
+    fun recommendFoodByInputRepository(context: Context): RecommendFoodByInputRepository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val user = runBlocking { pref.getUserToken() }
+        val apiService = ApiConfig.getApiService(user)
+        return RecommendFoodByInputRepository.getInstance(apiService)
     }
 }

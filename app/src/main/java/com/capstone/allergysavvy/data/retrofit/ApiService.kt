@@ -3,6 +3,7 @@ package com.capstone.allergysavvy.data.retrofit
 import com.capstone.allergysavvy.data.response.FoodDetailResponse
 import com.capstone.allergysavvy.data.response.GetFoodRandomResponse
 import com.capstone.allergysavvy.data.response.LoginResponse
+import com.capstone.allergysavvy.data.response.RecommendFoodByInputResponse
 import com.capstone.allergysavvy.data.response.RegisterResponse
 import com.capstone.allergysavvy.data.response.SearchListResponse
 import com.capstone.allergysavvy.data.response.SetUserAllergiesResponse
@@ -73,4 +74,11 @@ interface ApiService {
 
     @GET("food/random")
     suspend fun getFoodRandom(): GetFoodRandomResponse
+
+    @FormUrlEncoded
+    @POST("recommendation")
+    suspend fun getRecommendFoodByInput(
+        @Field("ingredient") ingredient: String
+    ): RecommendFoodByInputResponse
+
 }

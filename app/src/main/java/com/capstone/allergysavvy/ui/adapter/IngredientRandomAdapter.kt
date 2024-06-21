@@ -2,10 +2,12 @@ package com.capstone.allergysavvy.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.response.DataItemIngredientRandom
 import com.capstone.allergysavvy.databinding.ItemIngredientBinding
 import com.capstone.allergysavvy.utils.imageUrlIngredient
@@ -41,6 +43,10 @@ class IngredientRandomAdapter :
             Glide.with(binding.root)
                 .load(urlImage)
                 .into(binding.ivImageIngredient)
+
+            binding.cardIngredient.setCardBackgroundColor(
+                ContextCompat.getColor(binding.root.context, R.color.light_green)
+            )
         }
     }
 
