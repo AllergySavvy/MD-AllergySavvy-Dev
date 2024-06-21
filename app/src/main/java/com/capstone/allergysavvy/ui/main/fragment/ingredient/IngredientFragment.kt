@@ -131,7 +131,6 @@ class IngredientFragment : Fragment() {
         startActivity(intent)
     }
 
-
     private fun showSnackBar(message: String) {
         Snackbar.make(
             requireView(),
@@ -157,3 +156,4 @@ class IngredientFragment : Fragment() {
         })
     }
 }
+

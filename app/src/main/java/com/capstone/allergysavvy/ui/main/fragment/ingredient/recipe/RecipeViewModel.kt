@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.allergysavvy.data.Result
 import com.capstone.allergysavvy.data.repository.RecommendFoodByInputRepository
-import com.capstone.allergysavvy.data.response.DataItemFoodRecommend
+import com.capstone.allergysavvy.data.response.DataItemFoodRecommendationDetail
 import kotlinx.coroutines.launch
 
 class RecipeViewModel(
@@ -17,8 +17,9 @@ class RecipeViewModel(
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _recommendFoodByInput = MutableLiveData<Result<List<DataItemFoodRecommend?>>>()
-    val recommendFoodByInput: LiveData<Result<List<DataItemFoodRecommend?>>>
+    private val _recommendFoodByInput =
+        MutableLiveData<Result<List<DataItemFoodRecommendationDetail?>>>()
+    val recommendFoodByInput: LiveData<Result<List<DataItemFoodRecommendationDetail?>>>
         get() = _recommendFoodByInput
 
     fun getRecommendFoodByInput(ingredient: String) {

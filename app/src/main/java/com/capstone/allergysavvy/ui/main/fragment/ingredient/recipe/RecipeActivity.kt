@@ -46,9 +46,8 @@ class RecipeActivity : AppCompatActivity() {
             when (result) {
                 is Result.Success -> {
                     binding.progressBarRecipe.visibility = View.GONE
-                    val data = result.data
                     binding.rvRecipes.layoutManager = LinearLayoutManager(this)
-                    binding.rvRecipes.adapter = RecommendationFoodAdapter(data)
+                    binding.rvRecipes.adapter = RecommendationFoodAdapter()
                 }
 
                 is Result.Error -> {
@@ -89,4 +88,5 @@ class RecipeActivity : AppCompatActivity() {
         const val EXTRA_SELECTED_INGREDIENTS = "extra_selected_ingredients"
     }
 }
+
 
