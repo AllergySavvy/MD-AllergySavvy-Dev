@@ -39,9 +39,11 @@ class CategoryActivity : AppCompatActivity() {
             CategoryViewModelFactory.getInstance(this)
         categoryViewModel = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
 
-        checkThemeSetting()
-        setUpUsername()
-        setupAction()
+        categoryViewModel.apply {
+            checkThemeSetting()
+            setUpUsername()
+            setupAction()
+        }
     }
 
     private fun setUpUsername() {

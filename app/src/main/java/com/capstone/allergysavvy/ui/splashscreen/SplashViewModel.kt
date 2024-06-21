@@ -14,7 +14,6 @@ class SplashViewModel(
 ) : ViewModel() {
 
     private val _isUserTokenAvailable = MutableLiveData<Boolean>()
-
     val isUserTokenAvailable: LiveData<Boolean>
         get() = _isUserTokenAvailable
 
@@ -28,7 +27,6 @@ class SplashViewModel(
 
     init {
         checkUserData()
-        getUserData()
     }
 
     private fun checkUserData() {
@@ -41,13 +39,11 @@ class SplashViewModel(
         }
     }
 
-    private fun getUserData() {
+     fun getUserData() {
         viewModelScope.launch {
             val response = getUserDataRepository.getUserData()
             val userAllergy = response.data?.userAllergies
             _isUserHaveAllergyIngredient.value = userAllergy != null
-
         }
     }
-
 }

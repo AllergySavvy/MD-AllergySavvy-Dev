@@ -21,8 +21,6 @@ import com.capstone.allergysavvy.ui.onboarding.OnBoardingActivity
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
     private lateinit var splashViewModel: SplashViewModel
-    private var isUserAllergies: Boolean? = null
-    private var isUserHaveAllergiesIngredient: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,7 @@ class SplashScreen : AppCompatActivity() {
         }
 
         setupViewModel()
-        checkUserToken()
+        observeViewModel()
     }
 
     private fun setupViewModel() {
@@ -46,18 +44,21 @@ class SplashScreen : AppCompatActivity() {
         )[SplashViewModel::class.java]
     }
 
-    private fun checkUserToken() {
+    private fun observeViewModel() {
         splashViewModel.isUserTokenAvailable.observe(this) { isUserTokenAvailable ->
             if (isUserTokenAvailable) {
-                checkUserHaveAllergiesIngredient()
-                if (isUserHaveAllergiesIngredient == true) {
-                    moveToMainActivity()
-                } else {
-                    checkUserCategory()
-                    if (isUserAllergies == true) {
-                        moveToFormActivity()
-                    } else {
+                splashViewModel.getUserData()
+                splashViewModel.isUserHaveAllergyIngredient.observe(this) { isUserHaveAllergyIngredient ->
+                    if (isUserHaveAllergyIngredient == true) {
                         moveToMainActivity()
+                    } else {
+                        splashViewModel.isUserAllergy.observe(this) { isUserAllergy ->
+                            if (isUserAllergy == true) {
+                                moveToFormActivity()
+                            } else {
+                                moveToMainActivity()
+                            }
+                        }
                     }
                 }
             } else {
@@ -80,18 +81,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 3500)
-    }
-
-    private fun checkUserCategory() {
-        splashViewModel.isUserAllergy.observe(this) { isUserAllergy ->
-            isUserAllergies = isUserAllergy
-        }
-    }
-
-    private fun checkUserHaveAllergiesIngredient() {
-        splashViewModel.isUserHaveAllergyIngredient.observe(this) { isUserHaveAllergyIngredient ->
-            isUserHaveAllergiesIngredient = isUserHaveAllergyIngredient
-        }
     }
 
     private fun moveToOnboarding() {
