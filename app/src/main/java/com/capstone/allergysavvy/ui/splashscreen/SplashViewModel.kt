@@ -1,5 +1,6 @@
 package com.capstone.allergysavvy.ui.splashscreen
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,11 +40,17 @@ class SplashViewModel(
         }
     }
 
-     fun getUserData() {
+    fun getUserData() {
         viewModelScope.launch {
-            val response = getUserDataRepository.getUserData()
-            val userAllergy = response.data?.userAllergies
-            _isUserHaveAllergyIngredient.value = userAllergy != null
+            try {
+                val response = getUserDataRepository.getUserData()
+                val userAllergy = response.data?.userAllergies
+                _isUserHaveAllergyIngredient.value = userAllergy != null
+            } catch (e: Exception) {
+                Log.e("SplashViewModel", "Error getting user data: ${e.message}")
+                _isUserHaveAllergyIngredient.value = false
+            }
+
         }
     }
 }

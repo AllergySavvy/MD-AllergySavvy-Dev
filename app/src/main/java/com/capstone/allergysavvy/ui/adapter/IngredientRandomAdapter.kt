@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.capstone.allergysavvy.data.response.DataItemIngredientRandom
 import com.capstone.allergysavvy.databinding.ItemIngredientBinding
+import com.capstone.allergysavvy.utils.imageUrlIngredient
 
 class IngredientRandomAdapter :
     ListAdapter<DataItemIngredientRandom, IngredientRandomAdapter.MyViewHolder>(DIFF_CALLBACK) {
@@ -34,6 +36,11 @@ class IngredientRandomAdapter :
         fun bind(randomIngredient: DataItemIngredientRandom) {
             binding.tvIngredientName.text = randomIngredient.ingredient
             val categoryIngredient = randomIngredient.category
+
+            val urlImage = categoryIngredient?.let { imageUrlIngredient(it) }
+            Glide.with(binding.root)
+                .load(urlImage)
+                .into(binding.ivImageIngredient)
         }
     }
 

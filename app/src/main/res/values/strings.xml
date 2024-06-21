@@ -110,5 +110,6 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="add_pohoto_profile">Add pohoto profile</string>
+    <string name="send_ingredient">Send ingredient</string>
 
 </resources>

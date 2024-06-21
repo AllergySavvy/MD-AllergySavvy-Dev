@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?actionBarSize"
     tools:context=".ui.main.fragment.ingredient.IngredientFragment">
 
     <TextView
@@ -21,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/ti_search_ingredient_fragment_ingredient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -32,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title_ingredient">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_search_ingredient_fragment_ingredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/backround_round_search_bar"
@@ -45,13 +47,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ingredient"
         android:layout_width="0dp"
-        tools:listitem="@layout/item_ingredient"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/ti_search_ingredient_fragment_ingredient"
+        app:layout_constraintStart_toStartOf="@+id/ti_search_ingredient_fragment_ingredient"
+        app:layout_constraintTop_toBottomOf="@+id/ti_search_ingredient_fragment_ingredient"
+        tools:listitem="@layout/item_ingredient" />
 
     <ProgressBar
         android:id="@+id/progress_bar_ingredient"
@@ -62,6 +64,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_send_ingredient_fragment_ingredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/dark_green"
+        android:clickable="true"
+        android:contentDescription="@string/send_ingredient"
+        android:focusable="true"
+        android:src="@drawable/icon_search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
