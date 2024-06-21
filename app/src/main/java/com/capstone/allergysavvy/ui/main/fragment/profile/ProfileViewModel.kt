@@ -27,7 +27,7 @@ class ProfileViewModel(
 
     fun logout() {
         viewModelScope.launch {
-            userPreference.clearUserToken()
+            userPreference.clearUserData()
         }
     }
 }

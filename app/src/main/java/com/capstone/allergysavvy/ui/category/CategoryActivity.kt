@@ -20,6 +20,8 @@ import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 class CategoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoryBinding
     private var isUserAllergy: Boolean = false
+    private lateinit var categoryViewModel: CategoryViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,9 +35,19 @@ class CategoryActivity : AppCompatActivity() {
             insets
         }
 
-        checkThemeSetting()
+        val factory: CategoryViewModelFactory =
+            CategoryViewModelFactory.getInstance(this)
+        categoryViewModel = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
 
+        checkThemeSetting()
+        setUpUsername()
         setupAction()
+    }
+
+    private fun setUpUsername() {
+        categoryViewModel.userName.observe(this) {
+            binding.tvUsernameCategory.text = it
+        }
     }
 
     private fun checkThemeSetting() {
@@ -70,8 +82,10 @@ class CategoryActivity : AppCompatActivity() {
 
         binding.btnChooseCategory.setOnClickListener {
             if (isUserAllergy) {
+                categoryViewModel.saveUserStatus(false)
                 allergyCategory()
             } else {
+                categoryViewModel.saveUserStatus(true)
                 nonAllergyCategory()
             }
         }

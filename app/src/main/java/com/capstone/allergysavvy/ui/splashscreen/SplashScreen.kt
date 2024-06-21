@@ -13,12 +13,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
+import com.capstone.allergysavvy.di.Injection
+import com.capstone.allergysavvy.ui.category.form.FormActivity
 import com.capstone.allergysavvy.ui.main.MainActivity
 import com.capstone.allergysavvy.ui.onboarding.OnBoardingActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
     private lateinit var splashViewModel: SplashViewModel
+    private var isUserAllergies: Boolean? = null
+    private var isUserHaveAllergiesIngredient: Boolean? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,30 +34,71 @@ class SplashScreen : AppCompatActivity() {
             insets
         }
 
-        checkUserTokenAvailable()
-        moveToNextActivity()
+        setupViewModel()
+        checkUserToken()
     }
 
-    private fun checkUserTokenAvailable() {
+    private fun setupViewModel() {
         val userPreference = UserPreference.getInstance(application.dataStore)
         splashViewModel = ViewModelProvider(
             this,
-            SplashViewModelFactory(userPreference)
+            SplashViewModelFactory(userPreference, Injection.getUserDataRepository(application))
         )[SplashViewModel::class.java]
     }
 
-    private fun moveToNextActivity() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            splashViewModel.isUserTokenAvailable.observe(this) { userTokenAvailable ->
-                val intent = if (userTokenAvailable) {
-                    Intent(this, MainActivity::class.java)
+    private fun checkUserToken() {
+        splashViewModel.isUserTokenAvailable.observe(this) { isUserTokenAvailable ->
+            if (isUserTokenAvailable) {
+                checkUserHaveAllergiesIngredient()
+                if (isUserHaveAllergiesIngredient == true) {
+                    moveToMainActivity()
                 } else {
-                    Intent(this, OnBoardingActivity::class.java)
+                    checkUserCategory()
+                    if (isUserAllergies == true) {
+                        moveToFormActivity()
+                    } else {
+                        moveToMainActivity()
+                    }
                 }
-                startActivity(intent)
-                finish()
+            } else {
+                moveToOnboarding()
             }
+        }
+    }
+
+    private fun moveToMainActivity() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this@SplashScreen, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }, 3500)
     }
 
+    private fun moveToFormActivity() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this@SplashScreen, FormActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3500)
+    }
+
+    private fun checkUserCategory() {
+        splashViewModel.isUserAllergy.observe(this) { isUserAllergy ->
+            isUserAllergies = isUserAllergy
+        }
+    }
+
+    private fun checkUserHaveAllergiesIngredient() {
+        splashViewModel.isUserHaveAllergyIngredient.observe(this) { isUserHaveAllergyIngredient ->
+            isUserHaveAllergiesIngredient = isUserHaveAllergyIngredient
+        }
+    }
+
+    private fun moveToOnboarding() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this@SplashScreen, OnBoardingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3500)
+    }
 }

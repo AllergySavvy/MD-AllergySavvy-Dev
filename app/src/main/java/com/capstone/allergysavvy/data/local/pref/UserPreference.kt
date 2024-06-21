@@ -3,6 +3,7 @@ package com.capstone.allergysavvy.data.local.pref
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -15,6 +16,7 @@ class UserPreference private constructor(
 ) {
     private val userToken = stringPreferencesKey("user_token")
     private val userName = stringPreferencesKey("user_name")
+    private val userAllergy = booleanPreferencesKey("is_user_allergy")
 
     suspend fun getUserToken(): String {
         val preferences = dataStore.data.first()
@@ -26,6 +28,17 @@ class UserPreference private constructor(
         return preferences[userName] ?: ""
     }
 
+    suspend fun getStatusAllergyUser(): Boolean {
+        val preferences = dataStore.data.first()
+        return preferences[userAllergy] ?: false
+    }
+
+    suspend fun saveStatusUserAllergy(isUserAllergy: Boolean) {
+        dataStore.edit {
+            it[userAllergy] = isUserAllergy
+        }
+    }
+
     suspend fun saveUserData(token: String, username: String) {
         dataStore.edit {
             it[userToken] = token
@@ -33,7 +46,7 @@ class UserPreference private constructor(
         }
     }
 
-    suspend fun clearUserToken() {
+    suspend fun clearUserData() {
         dataStore.edit {
             it.clear()
         }
