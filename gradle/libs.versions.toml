@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.5.2"
 cardview = "1.0.0"
 googleApiServicesYoutube = "v3-rev222-1.25.0"
 justifiedtextview = "1.1.0"

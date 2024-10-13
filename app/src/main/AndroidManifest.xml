@@ -18,9 +18,6 @@
             android:name=".ui.main.fragment.ingredient.recipe.RecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.fragment.ingredient.recipe.detailRecipesRecommendation.DetailFoodRecipesRecommendationActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipeActivity"
             android:exported="false" />
         <activity
