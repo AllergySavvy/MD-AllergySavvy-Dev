@@ -1,8 +1,10 @@
 package com.capstone.allergysavvy.di
 
 import android.content.Context
+import com.capstone.allergysavvy.data.local.database.RecipeFavoriteDatabase
 import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
+import com.capstone.allergysavvy.data.repository.FavoriteRepository
 import com.capstone.allergysavvy.data.repository.FoodDetailRepository
 import com.capstone.allergysavvy.data.repository.FoodRecipeRandomRepository
 import com.capstone.allergysavvy.data.repository.GetUserDataRepository
@@ -14,6 +16,7 @@ import com.capstone.allergysavvy.data.repository.RegisterRepository
 import com.capstone.allergysavvy.data.repository.SetUserAllergiesRepository
 import com.capstone.allergysavvy.data.repository.VideoRepository
 import com.capstone.allergysavvy.data.retrofit.ApiConfig
+import com.capstone.allergysavvy.utils.AppExecutors
 import kotlinx.coroutines.runBlocking
 
 object Injection {
@@ -68,7 +71,10 @@ object Injection {
         val pref = UserPreference.getInstance(context.dataStore)
         val user = runBlocking { pref.getUserToken() }
         val apiService = ApiConfig.getApiService(user)
-        return FoodDetailRepository.getInstance(apiService)
+        val database = RecipeFavoriteDatabase.getInstance(context)
+        val recipeFavoriteDao = database.recipeFavoriteDao()
+        val appExecutors = AppExecutors()
+        return FoodDetailRepository.getInstance(apiService, appExecutors, recipeFavoriteDao)
     }
 
     fun userPreference(context: Context): UserPreference {
@@ -87,5 +93,11 @@ object Injection {
         val user = runBlocking { pref.getUserToken() }
         val apiService = ApiConfig.getApiService(user)
         return RecommendFoodByInputRepository.getInstance(apiService)
+    }
+
+    fun favoriteRepository(context: Context): FavoriteRepository {
+        val database = RecipeFavoriteDatabase.getInstance(context)
+        val recipeFavoriteDao = database.recipeFavoriteDao()
+        return FavoriteRepository.getInstance(recipeFavoriteDao)
     }
 }

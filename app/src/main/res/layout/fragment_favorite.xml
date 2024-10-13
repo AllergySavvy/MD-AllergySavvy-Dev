@@ -29,5 +29,56 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_title_fragment_favorite"
         app:layout_constraintStart_toStartOf="@+id/tv_title_fragment_favorite"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_fragment_favorite" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_fragment_favorite" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/iv_error_favorite"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/icon_find_error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002" />
+
+    <TextView
+        android:id="@+id/tv_oops_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/oops"
+        android:textColor="@color/dark_green"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_error_favorite"
+        app:layout_constraintStart_toStartOf="@+id/iv_error_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/iv_error_favorite" />
+
+    <TextView
+        android:id="@+id/tv_msg_error_favorite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-58dp"
+        android:layout_marginEnd="-58dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Sorry, you don't have any favorite recipes"
+        android:textAlignment="center"
+        android:textColor="@color/dark_green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_error_favorite"
+        app:layout_constraintStart_toStartOf="@+id/iv_error_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/tv_oops_favorite" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_favorite"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

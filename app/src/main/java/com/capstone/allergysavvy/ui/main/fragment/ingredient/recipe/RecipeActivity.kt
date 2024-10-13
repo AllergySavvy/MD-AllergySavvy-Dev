@@ -11,7 +11,9 @@ import com.capstone.allergysavvy.data.local.pref.SettingPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
 import com.capstone.allergysavvy.databinding.ActivityRecipeBinding
 import com.capstone.allergysavvy.di.Injection
-import com.capstone.allergysavvy.ui.adapter.FoodRecipeRandomAdapter
+import com.capstone.allergysavvy.ui.adapter.RecommendationFoodAdapter
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipeViewModel
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipesViewModelFactory
 import com.capstone.allergysavvy.ui.setting.SettingViewModel
 import com.capstone.allergysavvy.ui.setting.SettingViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 class RecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeBinding
     private lateinit var recipeViewModel: RecipeViewModel
+    private lateinit var detailRecipeViewModel: DetailRecipeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +29,17 @@ class RecipeActivity : AppCompatActivity() {
         binding = ActivityRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupDetailRecipeViewModel()
+
         val factory: RecipeViewModelFactory =
             RecipeViewModelFactory.getInstance(
-                this,
-                Injection.recommendFoodByInputRepository(context = this)
+                Injection.recommendFoodByInputRepository(this)
             )
         recipeViewModel = ViewModelProvider(this, factory)[RecipeViewModel::class.java]
 
         binding.rvRecipes.layoutManager = GridLayoutManager(this, 2)
-        val foodRecipeRandomAdapter = FoodRecipeRandomAdapter()
-        binding.rvRecipes.adapter = foodRecipeRandomAdapter
+        val recommendationFoodAdapter = RecommendationFoodAdapter(detailRecipeViewModel)
+        binding.rvRecipes.adapter = recommendationFoodAdapter
 
         checkThemeSetting()
 
@@ -43,19 +47,25 @@ class RecipeActivity : AppCompatActivity() {
             binding.progressBarRecipe.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        recipeViewModel.findFoodRandom()
+        val selectedIngredients = intent.getStringExtra(EXTRA_SELECTED_INGREDIENTS)
+        if (selectedIngredients != null) {
+            recipeViewModel.getRecommendFoodByInput(selectedIngredients)
+        }
 
-        recipeViewModel.foodRecipeRandom.observe(this) {
+        recipeViewModel.recommendFoodByInput.observe(this) {
             when (it) {
                 is Result.Error -> {
                     binding.progressBarRecipe.visibility = View.GONE
                     showSnackBar(it.error)
                 }
 
-                Result.Loading -> binding.progressBarRecipe.visibility = View.VISIBLE
+                Result.Loading -> {
+                    binding.progressBarRecipe.visibility = View.VISIBLE
+                }
+
                 is Result.Success -> {
                     binding.progressBarRecipe.visibility = View.GONE
-                    (binding.rvRecipes.adapter as FoodRecipeRandomAdapter).submitList(it.data)
+                    (binding.rvRecipes.adapter as RecommendationFoodAdapter).submitList(it.data)
                 }
             }
         }
@@ -77,6 +87,14 @@ class RecipeActivity : AppCompatActivity() {
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
             }
         }
+    }
+
+    private fun setupDetailRecipeViewModel() {
+        val factoryDetailRecipe: DetailRecipesViewModelFactory =
+            DetailRecipesViewModelFactory.getInstance(this)
+        detailRecipeViewModel = ViewModelProvider(
+            this, factoryDetailRecipe
+        )[DetailRecipeViewModel::class.java]
     }
 
     private fun showSnackBar(message: String) {

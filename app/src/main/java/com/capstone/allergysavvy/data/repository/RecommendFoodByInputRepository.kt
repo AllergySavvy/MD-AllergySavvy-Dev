@@ -10,11 +10,8 @@ class RecommendFoodByInputRepository(
     suspend fun getRecommendFoodByInput(ingredient: String): Result<List<DataItemFoodRecommendationDetail?>> {
         try {
             val response = apiService.getRecommendFoodByInput(ingredient)
-            if (response.status == "OK") {
-                val recommendFoodByInput = response.data ?: emptyList()
-                return Result.Success(recommendFoodByInput)
-            } else {
-                return Result.Error("Error : ${response.message}")
+            with(response) {
+                return Result.Success(data ?: emptyList())
             }
         } catch (e: Exception) {
             return Result.Error(e.message.toString())

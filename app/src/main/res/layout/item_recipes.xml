@@ -50,7 +50,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/iv_favorite"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="16dp"

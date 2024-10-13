@@ -84,10 +84,8 @@ class CategoryActivity : AppCompatActivity() {
 
         binding.btnChooseCategory.setOnClickListener {
             if (isUserAllergy) {
-                categoryViewModel.saveUserStatus(false)
                 allergyCategory()
             } else {
-                categoryViewModel.saveUserStatus(true)
                 nonAllergyCategory()
             }
         }

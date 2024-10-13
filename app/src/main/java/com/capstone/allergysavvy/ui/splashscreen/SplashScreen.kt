@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.local.pref.UserPreference
 import com.capstone.allergysavvy.data.local.pref.dataStore
-import com.capstone.allergysavvy.di.Injection
 import com.capstone.allergysavvy.ui.category.form.FormActivity
 import com.capstone.allergysavvy.ui.main.MainActivity
 import com.capstone.allergysavvy.ui.onboarding.OnBoardingActivity
@@ -40,27 +39,14 @@ class SplashScreen : AppCompatActivity() {
         val userPreference = UserPreference.getInstance(application.dataStore)
         splashViewModel = ViewModelProvider(
             this,
-            SplashViewModelFactory(userPreference, Injection.getUserDataRepository(application))
+            SplashViewModelFactory(userPreference)
         )[SplashViewModel::class.java]
     }
 
     private fun observeViewModel() {
         splashViewModel.isUserTokenAvailable.observe(this) { isUserTokenAvailable ->
             if (isUserTokenAvailable) {
-                splashViewModel.getUserData()
-                splashViewModel.isUserHaveAllergyIngredient.observe(this) { isUserHaveAllergyIngredient ->
-                    if (isUserHaveAllergyIngredient == true) {
-                        moveToMainActivity()
-                    } else {
-                        splashViewModel.isUserAllergy.observe(this) { isUserAllergy ->
-                            if (isUserAllergy == true) {
-                                moveToFormActivity()
-                            } else {
-                                moveToMainActivity()
-                            }
-                        }
-                    }
-                }
+                moveToMainActivity()
             } else {
                 moveToOnboarding()
             }
@@ -75,13 +61,6 @@ class SplashScreen : AppCompatActivity() {
         }, 3500)
     }
 
-    private fun moveToFormActivity() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreen, FormActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 3500)
-    }
 
     private fun moveToOnboarding() {
         Handler(Looper.getMainLooper()).postDelayed({

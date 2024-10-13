@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -109,7 +111,7 @@ class RegisterActivity : AppCompatActivity() {
                 tiPasswordRegister.error = null
                 tiEmailRegister.error = null
                 tiUsernameRegister.error = null
-                registerUser(username, email, password)
+                registerUser(username = username, email = email, password = password)
             }
         }
     }
@@ -121,6 +123,21 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.showErrorDialog.observe(this) {
             showErrorDialog(it)
+        }
+
+        registerViewModel.loading.observe(this) {
+            if (it) {
+                binding.progressBarRegister.visibility = View.VISIBLE
+                binding.overlayRegister.visibility = View.VISIBLE
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                )
+            } else {
+                binding.progressBarRegister.visibility = View.GONE
+                binding.overlayRegister.visibility = View.GONE
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            }
         }
     }
 

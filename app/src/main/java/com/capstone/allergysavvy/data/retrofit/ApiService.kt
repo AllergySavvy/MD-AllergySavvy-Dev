@@ -78,7 +78,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("recommendation")
     suspend fun getRecommendFoodByInput(
-        @Field("ingredient") ingredient: String
+        @Field("user_preference_ingredients") userPreferenceIngredients: String
     ): RecommendFoodByInputResponse
 
 

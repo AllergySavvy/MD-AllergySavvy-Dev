@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.capstone.allergysavvy.R
 import com.capstone.allergysavvy.data.response.DataItemFoodRecommendationDetail
 import com.capstone.allergysavvy.databinding.ItemRecipesBinding
 import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipeActivity
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipeViewModel
 
-class RecommendationFoodAdapter :
+class RecommendationFoodAdapter(
+    private val detailRecipeViewModel: DetailRecipeViewModel
+) :
     ListAdapter<DataItemFoodRecommendationDetail, RecommendationFoodAdapter.MyViewHolder>(
         DIFF_CALLBACK
     ) {
@@ -26,16 +30,20 @@ class RecommendationFoodAdapter :
         holder.bind(foodRecommend)
 
         holder.itemView.setOnClickListener {
-            val foodIndex = foodRecommend.imageUrl
+            val foodIndex = foodRecommend.index
+            val foodName = foodRecommend.recipeName
+            val foodImageUrl = foodRecommend.imageUrl
             val intentIndex =
                 Intent(holder.itemView.context, DetailRecipeActivity::class.java).apply {
                     putExtra(DetailRecipeActivity.EXTRA_INDEX, foodIndex)
+                    putExtra(DetailRecipeActivity.EXTRA_RECIPES_NAME, foodName)
+                    putExtra(DetailRecipeActivity.EXTRA_IMAGE_URL, foodImageUrl)
                 }
             holder.itemView.context.startActivity(intentIndex)
         }
     }
 
-    class MyViewHolder(private val binding: ItemRecipesBinding) :
+    inner class MyViewHolder(private val binding: ItemRecipesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(foodRecommend: DataItemFoodRecommendationDetail) {
@@ -43,7 +51,19 @@ class RecommendationFoodAdapter :
             Glide.with(binding.root)
                 .load(foodRecommend.imageUrl)
                 .into(binding.ivRecipesImage)
+
+            foodRecommend.index?.let {
+                detailRecipeViewModel.isFavoriteRecipe(it).observeForever { isFavorite ->
+                    if (isFavorite) {
+                        binding.ivFavorite.setImageResource(R.drawable.fill_favorite)
+                    } else {
+                        binding.ivFavorite.setImageResource(R.drawable.favorite)
+                    }
+                }
+            }
         }
+
+
     }
 
     companion object {

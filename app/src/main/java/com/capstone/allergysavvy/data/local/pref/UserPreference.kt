@@ -16,7 +16,6 @@ class UserPreference private constructor(
 ) {
     private val userToken = stringPreferencesKey("user_token")
     private val userName = stringPreferencesKey("user_name")
-    private val userAllergy = booleanPreferencesKey("is_user_allergy")
 
     suspend fun getUserToken(): String {
         val preferences = dataStore.data.first()
@@ -26,17 +25,6 @@ class UserPreference private constructor(
     suspend fun getUserName(): String {
         val preferences = dataStore.data.first()
         return preferences[userName] ?: ""
-    }
-
-    suspend fun getStatusAllergyUser(): Boolean {
-        val preferences = dataStore.data.first()
-        return preferences[userAllergy] ?: false
-    }
-
-    suspend fun saveStatusUserAllergy(isUserAllergy: Boolean) {
-        dataStore.edit {
-            it[userAllergy] = isUserAllergy
-        }
     }
 
     suspend fun saveUserData(token: String, username: String) {

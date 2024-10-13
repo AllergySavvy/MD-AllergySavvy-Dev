@@ -14,6 +14,8 @@ import com.capstone.allergysavvy.data.Result
 import com.capstone.allergysavvy.databinding.FragmentHomeBinding
 import com.capstone.allergysavvy.ui.adapter.FoodRecipeRandomAdapter
 import com.capstone.allergysavvy.ui.adapter.IngredientRandomAdapter
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipeViewModel
+import com.capstone.allergysavvy.ui.main.fragment.ingredient.recipe.detailrecipe.DetailRecipesViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
@@ -23,6 +25,10 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels {
         HomeViewModelFactory.getInstance(requireContext())
     }
+    private val detailRecipeViewModel: DetailRecipeViewModel by viewModels {
+        DetailRecipesViewModelFactory.getInstance(requireContext())
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +54,7 @@ class HomeFragment : Fragment() {
 
         binding.rvRecentRecipes.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvRecentRecipes.adapter = FoodRecipeRandomAdapter()
+        binding.rvRecentRecipes.adapter = FoodRecipeRandomAdapter(detailRecipeViewModel)
 
         binding.rvRecentIngredient.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

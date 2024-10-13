@@ -23,10 +23,4 @@ class CategoryViewModel(
             _username.value = userPreference.getUserName()
         }
     }
-
-    fun saveUserStatus(isUserAllergy: Boolean) {
-        viewModelScope.launch {
-            userPreference.saveStatusUserAllergy(isUserAllergy)
-        }
-    }
 }

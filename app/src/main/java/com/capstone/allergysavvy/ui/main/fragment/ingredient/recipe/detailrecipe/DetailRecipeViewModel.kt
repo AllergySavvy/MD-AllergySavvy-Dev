@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.allergysavvy.data.Result
+import com.capstone.allergysavvy.data.local.database.RecipeFavoriteEntity
 import com.capstone.allergysavvy.data.repository.FoodDetailRepository
 import com.capstone.allergysavvy.data.response.DataItemFoodDetail
 import kotlinx.coroutines.launch
@@ -27,6 +28,27 @@ class DetailRecipeViewModel(
                 Log.e(TAG, "getFoodDetail: ${e.message.toString()}")
             }
         }
+    }
+
+    fun setFavoriteRecipe(index: Int, imageUrl: String?, recipeName: String?) {
+        val recipeFavoriteEntity =
+            RecipeFavoriteEntity(index = index, imageUrl = imageUrl, recipeName = recipeName)
+        foodDetailRepository.setFavoriteRecipe(recipeFavoriteEntity)
+    }
+
+    fun removeFavoriteRecipe(recipeFavoriteEntity: RecipeFavoriteEntity) {
+        foodDetailRepository.removeFavoriteRecipe(recipeFavoriteEntity)
+    }
+
+    fun isFavoriteRecipe(index: Int): LiveData<Boolean> {
+        val isFavoriteRecipe = MutableLiveData<Boolean>()
+        val favoriteRecipe = foodDetailRepository.getFavoriteRecipe(index)
+
+        favoriteRecipe.observeForever {
+            val isFavorite = it != null
+            isFavoriteRecipe.value = isFavorite
+        }
+        return isFavoriteRecipe
     }
 
     companion object {

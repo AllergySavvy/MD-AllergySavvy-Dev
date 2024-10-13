@@ -14,44 +14,24 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/poppins"
-        android:text="@string/tv_title_ingredient"
+        android:text="Food recommendations for you"
         android:textColor="@color/dark_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:endIconMode="custom"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title_fragment_recipe"
-        app:layout_constraintStart_toStartOf="@+id/tv_title_fragment_recipe"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_fragment_recipe">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/backround_round_search_bar"
-            android:drawableStart="@drawable/icon_search"
-            android:drawablePadding="15dp"
-            android:hint="@string/hint_search_recipe"
-            android:imeOptions="actionSearch"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recipes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_fragment_recipe"
         tools:listitem="@layout/item_recipes" />
 
     <ProgressBar

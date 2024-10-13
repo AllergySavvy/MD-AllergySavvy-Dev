@@ -1,11 +1,17 @@
 package com.capstone.allergysavvy.data.repository
 
+import androidx.lifecycle.LiveData
 import com.capstone.allergysavvy.data.Result
+import com.capstone.allergysavvy.data.local.database.RecipeFavoriteDao
+import com.capstone.allergysavvy.data.local.database.RecipeFavoriteEntity
 import com.capstone.allergysavvy.data.response.DataItemFoodDetail
 import com.capstone.allergysavvy.data.retrofit.ApiService
+import com.capstone.allergysavvy.utils.AppExecutors
 
 class FoodDetailRepository private constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val appExecutors: AppExecutors,
+    private val foodRecipeFavoriteDao: RecipeFavoriteDao
 ) {
 
     suspend fun getDetailFoodRecipe(index: Int): Result<DataItemFoodDetail?> {
@@ -23,15 +29,37 @@ class FoodDetailRepository private constructor(
         }
     }
 
+    fun setFavoriteRecipe(foodRecipeFavoriteEntity: RecipeFavoriteEntity) {
+        appExecutors.diskIO.execute {
+            foodRecipeFavoriteDao.addFavoriteRecipe(foodRecipeFavoriteEntity)
+        }
+    }
+
+    fun removeFavoriteRecipe(foodRecipeFavoriteEntity: RecipeFavoriteEntity) {
+        appExecutors.diskIO.execute {
+            foodRecipeFavoriteDao.removeFavoriteRecipe(foodRecipeFavoriteEntity)
+        }
+    }
+
+    fun getFavoriteRecipe(index: Int): LiveData<RecipeFavoriteEntity> {
+        return foodRecipeFavoriteDao.getRecipeFavoriteByIndex(index)
+    }
+
     companion object {
         @Volatile
         private var INSTACE: FoodDetailRepository? = null
 
         fun getInstance(
-            apiService: ApiService
+            apiService: ApiService,
+            appExecutors: AppExecutors,
+            foodRecipeFavoriteDao: RecipeFavoriteDao
         ): FoodDetailRepository =
             INSTACE ?: synchronized(this) {
-                INSTACE ?: FoodDetailRepository(apiService)
+                INSTACE ?: FoodDetailRepository(
+                    apiService,
+                    appExecutors,
+                    foodRecipeFavoriteDao
+                )
             }.also { INSTACE = it }
     }
 }
